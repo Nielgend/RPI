@@ -1,0 +1,17 @@
+     <div class="col-12   col-sm-12 col-md-12 col-lg-12 paddingtitle" style="width:.5vw;height:auto">
+                            <div  class="chatbox" >
+                                <div  id="chatbox" class="container" style="min-width:99% ;margin-top:0px;margin-bottom: 0px "></div>
+                            </div>
+                            <div class="chatinput">
+                                <div class="container" style="min-width:99%;">
+                                    <div class="row ">
+                                        <div class="col-9 col-sm-10 col-md-10 col-lg-10 padding2" style="position: relative;" >
+                                            <input type="text" id="chattextfield" class="form-control chattextfield" placeholder="Enter Message Here..." >
+                                        </div>
+                                        <div class="col-1 col-sm-1 col-md-1 col-lg-1 padding2" style="position: relative;" >
+                                            <input class = "btn btn-info chatsend" type = "button" onclick="publishmsg('TOPIC/UTIL/CHAT/SENTMSG',document.getElementById('welcome').textContent + ':' +  document.getElementById('chattextfield').value)" value ="Send"/>
+                                        </div>
+                                    </div>
+                                 </div>
+                            </div>
+                        </div>

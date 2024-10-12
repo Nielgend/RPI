@@ -1,0 +1,138 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+body {
+  background-color: #ececec;
+  padding: 0;
+  padding-top: 20px;
+  margin: 0;
+  color: #4a4a4a;
+}
+.wrapper {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.button {
+  padding: 10px;
+  background: #ececec;
+  border: none;
+  border-radius: 0.5rem;
+  color: #444;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  box-shadow: -6px -6px 14px rgba(255, 255, 255, 0.7),
+    -6px -6px 10px rgba(255, 255, 255, 0.5),
+    6px 6px 8px rgba(255, 255, 255, 0.075), 6px 6px 10px rgba(0, 0, 0, 0.15);
+}
+.button.green:hover {
+  box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.6),
+    -2px -2px 4px rgba(255, 255, 255, 0.4),
+    2px 2px 2px rgba(255, 255, 255, 0.05), 2px 2px 4px rgba(0, 0, 0, 0.1);
+  color: rgb(86, 186, 86);
+}
+
+.button.red:hover {
+  box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.6),
+    -2px -2px 4px rgba(255, 255, 255, 0.4),
+    2px 2px 2px rgba(255, 255, 255, 0.05), 2px 2px 4px rgba(0, 0, 0, 0.1);
+  color: rgb(255, 0, 0);
+}
+.button:active {
+  box-shadow: inset -2px -2px 6px rgba(255, 255, 255, 0.7),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.5),
+    inset 2px 2px 2px rgba(255, 255, 255, 0.075),
+    inset 2px 2px 4px rgba(0, 0, 0, 0.15);
+}
+.rooms {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  justify-content: center;
+}
+
+.container {
+  height: 150px; /* Adjusted to make room for text and button */
+  width: 300px; /* Set a fixed width for consistency */
+  box-shadow: -7px -7px 15px rgba(255, 255, 255, 0.65),
+    7px 7px 15px rgba(70, 70, 70, 0.12);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column; /* Stack text and button vertically */
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0 10px 0;
+  text-align: center;
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  height: 50px; /* Reduced height */
+  width: 100px; /* Reduced width */
+  border: 3px solid #ececec; /* Smaller border */
+  box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.65),
+    5px 5px 10px rgba(70, 70, 70, 0.12),
+    inset -5px -5px 10px rgba(255, 255, 255, 0.65),
+    inset 5px 5px 10px rgba(70, 70, 70, 0.12);
+  outline: none;
+  cursor: pointer;
+  border-radius: 30px; /* Adjusted for smaller size */
+  position: relative;
+  margin-top: 20px;
+}
+
+input[type="checkbox"]:before,
+input[type="checkbox"]:after {
+  content: "";
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  transition: 0.3s;
+}
+
+input[type="checkbox"]:before {
+  height: 35px; /* Reduced size */
+  width: 35px; /* Reduced size */
+  background-color: #ececec;
+  box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.75),
+    5px 5px 10px rgba(70, 70, 70, 0.12);
+  border-radius: 50%;
+  left: 10px; /* Adjusted for smaller switch */
+  text-align: center;
+  line-height: 35px; /* Align the text vertically */
+  font-size: 12px; /* Font size for ON/OFF text */
+  color: #7a7a7a; /* Initial color of text */
+}
+
+input[type="checkbox"]:checked:before {
+  left: 50px;
+  background-color: #55f696; /* Green when ON */
+  color: white; /* Text color when ON */
+}
+
+input[type="checkbox"]:not(:checked):before {
+  background-color: #ff6767; /* Red when OFF */
+  color: white; /* Text color when OFF */
+}
+
+input[type="checkbox"]:checked:before {
+  content: "ON"; /* Display ON when checked */
+}
+
+input[type="checkbox"]:not(:checked):before {
+  content: "OFF"; /* Display OFF when not checked */
+}
+
+.disconnected {
+  color: red;
+}
+.connected {
+  color: green;
+}
+
+b {
+  margin-right: 10px;
+}

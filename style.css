@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: Nunito Sans, sans-serif;
+}
+
+#host,
+#port,
+#topic {
+  border: none;
+  outline: none;
+  border-radius: 15px;
+  width: 200px;
+  height: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: #cccccc72;
+  box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.103);
+  transition: 300ms ease-in-out;
+  margin-bottom: 10px;
+}
+
+#port:focus {
+  background-color: white;
+  transform: scale(1.02);
+  box-shadow: 13px 13px 100px #969696, -13px -13px 100px #ffffff;
+}
+#topic:focus {
+  background-color: white;
+  transform: scale(1.02);
+  box-shadow: 13px 13px 100px #969696, -13px -13px 100px #ffffff;
+}
+#host:focus {
+  background-color: white;
+  transform: scale(1.02);
+  box-shadow: 13px 13px 100px #969696, -13px -13px 100px #ffffff;
+}
+
+.header {
+  width: 30%;
+  margin: 50px auto 0px;
+  color: white;
+  background: #5f9ea0;
+  text-align: center;
+  border: 1px solid #b0c4de;
+  border-bottom: none;
+  border-radius: 10px 10px 0px 0px;
+  padding: 20px;
+}
+form,
+.content {
+  width: 30%;
+  margin: 0px auto;
+  padding: 20px;
+  border-radius: 0px 0px 10px 10px;
+  text-align: center;
+}
+.input-group {
+  margin: 10px 0px 10px 0px;
+}
+.input-group label {
+  display: block;
+  text-align: left;
+  margin: 3px;
+}
+.input-group input {
+  height: 30px;
+  width: 93%;
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+@media (max-width: 940px) {
+  form {
+    text-align: left;
+  }
+}
+.btn {
+  padding: 10px;
+  font-size: 15px;
+  color: white;
+  background: #5f9ea0;
+  border: none;
+  border-radius: 5px;
+}
+.error {
+  width: 92%;
+  margin: 0px auto;
+  padding: 10px;
+  border: 1px solid #a94442;
+  color: #a94442;
+  background: #f2dede;
+  border-radius: 5px;
+  text-align: left;
+}
+.success {
+  color: #3c763d;
+  background: #dff0d8;
+  border: 1px solid #3c763d;
+  margin-bottom: 20px;
+}

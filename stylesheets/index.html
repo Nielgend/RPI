@@ -1,0 +1,84 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+</script>
+<script src="validator.min.js"></script>
+
+
+<!-- LOGIN -->
+
+<body>
+    <a href="#signup" id="signup">Sign-Up</a>
+    <div class="login-container">
+        <p hidden id="display1">Wrong user</p>
+        <form action="/log-in" method="POST" id="login">
+            <input type="text" placeholder="Username" name="UserName1" id="UserName1" required>
+            <input type="password" placeholder="Password" name="password1" id="password1" required>
+            <button type="submit" id="loginbutton">Login</button>
+        </form>
+
+    </div>
+</body>
+
+
+<!-- SIGNUP -->
+<div hidden id="try1">
+    <h1> Sign-up form</h1>
+    <p hidden id="display">Invalid password</p>
+    {{#if user }}
+    <section class="errors">
+        <p>Username already taken!</p>
+        <script>
+            return false;
+        </script>
+    </section>{{else}} {{/if}}
+    <form action="/submit" method="post" onsubmit="return check();">
+        <div class="input">
+            <input type="text" placeholder="Firstname" id="FirstName" name="FirstName" required>
+        </div>
+        <div class="input">
+            <input type="text" placeholder="Lastname" id="LastName" name="LastName" required>
+        </div>
+        <div class="input">
+            <input type="text" placeholder="Nickname" id="NickName" name="NickName" pattern="^[A-Za-z]+" title="Please enter alphabets only" required>
+        </div>
+        <div class="input">
+            <input type="text" placeholder="Username" id="UserName" name="UserName" required>
+        </div>
+        <div class="input">
+            <input type="password" placeholder="Password" id="password" name="password" required minlength="4">
+        </div>
+        <div class="input">
+            <input type="password" placeholder="Confirm Password" id="confirmPassword" name="confirmPassword">
+            <button type="submit" id="btnSignUp">Sign up</button>
+        </div>
+        <a href="/" id="loginform">Log-in</a>
+    </form>
+
+</div>
+
+
+<script>
+    function check() {
+        var pass = document.getElementById('password').value;
+        var cpass = document.getElementById('confirmPassword').value;
+        if (pass != cpass) {
+            $(document).ready(function() {
+                $("#display").show();
+            });
+            return false;
+        }
+    }
+
+    $(document).ready(function() {
+        $("#signup").click(function() {
+            $("#try1").show();
+            $("#login").hide();
+            $("#signup").hide();
+            $("#display").hide();
+        });
+        $("#loginform").click(function() {
+            $("#try1").hide();
+            $("#login").show();
+            $("#signup").show();
+        });
+    })
+</script>

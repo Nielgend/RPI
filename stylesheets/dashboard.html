@@ -1,0 +1,2196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SmartHome Buddy Dashboard</title>
+  <link rel="stylesheet"  href="/material/iconfont/material-icons.css">
+<link rel="stylesheet" href="/fontA/css/font-awesome.min.css">
+  <link rel="stylesheet"  href="/bootstrap.min.css">
+  <link rel="stylesheet"  href="/stylexx.css">
+  <link rel="stylesheet" type="text/css" href="daterangepicker.css" />
+
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" />
+
+
+
+    <script type="text/javascript" src="jquey1.js"></script>
+    <script src="bootstrap.min.js" ></script>
+    <script type="text/javascript" src="moment.min.js"></script>
+    <script type="text/javascript" src="daterangepicker.js"></script>
+   
+
+  <script src="jquerymobile.js"></script>
+
+
+
+  <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> 
+  <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script> 
+  <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script> 
+  <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script> 
+  
+  
+  
+  <script src="canvasjs.min.js" ></script>
+  <script src="popper.min.js"></script>
+  <script src="paho-mqttweb.js" type="text/javascript"></script>
+
+</head>
+<body>
+
+
+
+ 
+    <div  id="chatboxdiv" class="float2">
+      <div class="container messagebox" id= "chatbox">
+         
+    </div>
+      <div class="text-bar">
+          <div  class="container" style="width:15em ;margin-top:0.4vw;margin-bottom: 0px ; text-align: center" >
+            <div class="row">
+              <div class="col-10 col-sm-10 col-md-10 col-lg-10 messagetext" >
+                 <input id="chattextfield" class="messageinput"style="width:100%" type="text" placeholder="Type your message" >
+              </div>
+              
+              <div class="col-2 col-sm-2 col-md-2 col-lg-2 " style="cursor:pointer; color: white"  onclick="publishmsg('TOPIC/UTIL/CHAT/SENTMSG',document.getElementById('userlog').textContent + ':' +  document.getElementById('chattextfield').value)" >
+                <i class="fa fa-telegram fa-2x"></i>
+              </div>
+            </div>
+          </div>   
+        </div>
+      </div>
+    <div class="float3" onclick="chatclick()" style="cursor: pointer" >
+      Chatbox  <i class="	fa fa-comments-o"></i><i style="float:right; padding-top:.2em;padding-right: 1em;" class="		fa fa-angle-up"></i>
+    </div>
+    
+        <div class="container" style="background-color: rgb(33, 33, 39);width:auto   ">
+                <header class="blog-header py-1"  >
+                  <div class="row flex-nowrap justify-content-between align-items-center"   >
+                    <div class="col-6 ">
+                      <p  style="color:cornsilk;margin:0px" ><i class="fa fa-hand-o-right"></i> Status : <span id="status">Not Connected</span></p>
+                    </div>
+                  
+                    <div class="col-6 d-flex justify-content-end align-items-center">
+                            <li class="dropdown" style="cursor: pointer" ><a class="dropdown-toggle" style="color:white" data-toggle="dropdown" ><i class="	fa fa-address-book"></i>  Welcome, <span style="color:white" id="userlog">User</span> <b class="caret"></b></a>
+                                <ul class="dropdown-menu" style="padding:1em">
+                                    <li><a data-toggle="modal" data-target="#setupconnection"> <i class="fa fa-share-alt-square" ></i> Connections </a></li>
+                                    <li><a data-toggle="modal" data-target="#infomodal" > <i class="	fa fa-user-circle" ></i> Account </a></li>
+                                    <li><a data-toggle="modal" data-target="#helpmodal" ><i class="fa fa-question-circle"></i> Help</a></li>
+                                    <li><a data-toggle="modal" data-target="#infomodal" > <i class="fa fa-info-circle" ></i> About </a></li>
+                                  
+                                   <hr>
+                                    <li><a style="color:red"><i class="	fa fa-chevron-circle-left"></i> Logout</a></li>
+                                </ul>
+                            </li>
+                    </div>
+                  </div>
+                </header>
+        </div>
+    <div class="jumbotron text-center py-1" style="background: #1d304f;margin-bottom: 2px;padding: 0px; margin-top:1px">
+        <img src="icons/jumbotron.png" style="margin-top:1px; width: 35%;height:15vw;">   
+    </div>
+    <div id="cons1" class="cons1" style="">
+        <div  class="container" style="margin-top:2px;margin-bottom: 1px ; text-align: center" id= "concon">
+            <div class="row">
+                <div class="col-12  col-sm-12 col-md-12 col-lg-12 " >
+                    <div class="row">
+                        
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6 paddingtitle" >
+                            <button  class="presetbuttons"  data-toggle="modal" data-target="#viewalllightsmodal" style="background-image: url('icons/viewlights.png');"></button>
+                         </div>
+                        <div class="col-12   col-sm-6 col-md-6 col-lg-6 paddingtitle" >
+                            <button class="presetbuttons"  data-toggle="modal" data-target="#viewalloutletmodal" style="background-image: url('icons/viewsocket.png');"></button>
+                        </div>
+                        <div class="col-6   col-sm-6 col-md-6 col-lg-6 paddingtitle" style="">
+                          <div class="row">
+                          <div class="col-6   col-sm-6 col-md-6 col-lg-6 leftpaddingtitle" style="">
+                            <button class="smallpresetbuttons" id="controlall"  onclick="offalldevice()" style="background-image: url('icons/smallshut.png'); "></button>
+                          </div>
+                          <div class="col-6   col-sm-6 col-md-6 col-lg-6 rightpaddingtitle" style="">
+                            <button class="smallpresetbuttons" id="controlall"  onclick="onalldevice()" style="background-image: url('icons/smallon.png'); "></button>
+                          </div>
+                        </div>
+                        </div>
+                        <div class="col-6   col-sm-6 col-md-6 col-lg-6 paddingtitle" style="">
+                            <button class="presetbuttons"  data-toggle="modal" data-target="#camera" style="background-image: url('icons/viewhouse.png');"></button>
+                        </div>
+                        <div class="col-6   col-sm-6 col-md-6 col-lg-6 paddingtitle" style="">
+                            <button class="presetbuttons"  data-toggle="modal" data-target="#viewelecmetermodal" style="background-image: url('icons/viewelectric.png'); "></button>
+                        </div>
+                        <div class="col-6   col-sm-6 col-md-6 col-lg-6 paddingtitle" style="">
+                            <button class="presetbuttons"  data-toggle="modal" data-target="#viewmpptmodal" style="background-image: url('icons/mppt.png');  "></button>
+                        </div>
+                        
+                    </div>
+                </div>  
+        
+            </div>
+        </div>
+  
+     </div>
+     <div class="col-12   col-sm-12 col-md-12 col-lg-12 " style="text-align: center;color: white">
+      Project by : DION AGUILAR | MAUEN CASTILLO | GRAZIELLE AGCAOILI |MURFF MERLAS
+  </div>
+
+     
+<!-- SETUP CONNECTION MODAL -->
+<div class="modal fade" id="setupconnection" >
+        <div class="modal-dialog">
+          <div class="modal-content" >
+
+              <!-- Modal Header -->
+             <div class="modal-header">
+               <h4 class="modal-title">Setup Connection</h4>
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+              <!-- Modal body -->
+               <div class="modal-body" >
+                  <form id="mqttconnect">
+                    <div class="form-group">
+                      <label class="labels" for="address" >Address:</label>
+                      <input type="text" class="form-control" id="address" name="address" placeholder="169.253.23.25 / m15.cloudmqtt.com">
+                   </div>
+                   <div class="form-group">
+                      <label class="labels" for="port">Port:</label>
+                      <input type="text" class="form-control" id="port" name="port" placeholder="1883 / 9001">
+                   </div>
+                   <div class="form-group">
+                      <label class="labels" for="clientid">Client ID:</label>
+                      <input type="text" class="form-control" id="clientid" name="clientid" placeholder="client1">
+                   </div>
+                    <div class="form-group">
+                      <label class="labels" for="username">Username:</label>
+                      <input type="text" class="form-control" id="username" name="username" placeholder="smarthome">
+                   </div>
+                     <div class="form-group">
+                      <label class="labels" for="password">Password : </label>
+                      <input type="password" class="form-control" id="password" name="password" placeholder="password">
+                   </div>
+                    <div class="form-group">
+                      <label class="labels" for="connection">Choose a Connection</label>
+                      <select name="connectiontype" id="connectiontype" class="form-control" >
+                        <option value="local" >Local Area</option>
+                        <option value="online">Online</option>
+                      </select>
+                   </div>
+                   <!--<button type="submit" class="btn btn-default" style="float: right" id="conSubmit" ">Submit</button> -->
+                   <div class="text-right">
+                   <input class = "btn btn-secondary" type = "button" onclick="connect(this.form.address.value,this.form.port.value,this.form.clientid.value,this.form.username.value,this.form.password.value,this.form.connectiontype.value)" value ="Login"/>
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              </div>    
+              </form>
+               
+               </div>
+
+        </div>
+      </div>
+    </div>
+<!-- END OF CONNECTION MODAL -->     
+
+<!-- START OF HELP MODAL -->
+<div class="modal fade" id="helpmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Help</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              HELP CONTENT
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END OF HELP MODAL -->
+      
+      <!-- START OF INFO MODAL -->
+      <div class="modal fade" id="infomodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Information</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              INFORMATION CONTENT
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END OF HELP MODAL -->
+      
+
+<!-- ALL LIGHTS -->
+<div class="modal fade"  id="viewalllightsmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document"  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">All Lights</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" >
+        <div style="text-align:center">
+          <button id="modalmainbuttons" class="modalmainbuttons" onclick="onalllights()()" style="background-image: url('icons/alllightoff.png'); "></button>
+          <button id="modalmainbuttons" class="modalmainbuttons" onclick="offalllights()" style="background-image: url('icons/alllighton.png'); "></button>
+        </div>
+        <div   class="container" style="margin-top:2px;margin-bottom: 1px ; text-align: center;height: 31em;overflow-y:auto" >
+          <div class="row" id="lightbox">
+            
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary footerbutttons" data-dismiss="modal" >Close</button>
+        <button type="button" data-toggle="modal" data-target="#addlightdevice" class="btn btn-primary footerbutttons">Add Light Device  <i class="fa fa-lightbulb-o"></i>   </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ALL LIGHTS -->
+
+  </div>
+
+ <!-- START OF INFO MODAL -->
+ <div class="modal fade" id="addlightdevice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Add Light Device</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form id="adddeviceform">
+            
+               <div class="form-group">
+                  <label class="labels" for="devname">Device Name</label>
+                  <input type="text"  onclick="clicked('ldevnamevalid')" class="form-control" id="devname" name="devname" placeholder="light 1">
+                  <p id="ldevnamevalid" style="color: red;display: none" > *Please provide a device name*</p>
+               </div>
+               <div class="form-group">
+                  <label class="labels" for="stopic">Subscribe Topic</label>
+                  <input " type="text" class="form-control" id="stopic" name="stopic" placeholder="TOPIC/LIGHT/LIGHT1/FEEDBACK">
+                  <p id="ldevstopic" style="color: red;display: none" > *Please provide a device name*</p>
+               </div>
+                <div class="form-group">
+                  <label class="labels" for="ptopic">Publish Topic</label>
+                  <input  type="text"  class="form-control" id="ptopic" name="ptopic" placeholder="TOPIC/LIGHT/LIGHT1/SWITCH">
+                  <p id="ldevptopic" style="color: red;display: none" > *Please provide a device name*</p>
+               </div>
+              
+               <!--<button type="submit" class="btn btn-default" style="float: right" id="conSubmit" ">Submit</button> -->
+               <div class="text-right">
+               <input class = "btn btn-secondary" type = "button" onclick="addlightvalidate(this.form.devname.value,this.form.stopic.value,this.form.ptopic.value)" value ="Save"/>
+           <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cancel</button>
+          </div>    
+          </form>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+  <!-- END OF ADD LIGHT DEVICE MODAL -->
+  
+  <div class="modal fade" id="editlightdevice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Edit Light Device</h5>
+            
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <form id="adddeviceform">
+                <p hidden id="hdevname1"></p>
+                <p hidden id="hdevstopic"></p>
+                <p hidden id="hdevptopic"></p>
+                <p hidden id="hdevice"></p>
+                 <div class="form-group">
+                    <label class="labels" for="devname">Device Name</label>
+                    <input type="text"  onclick="clicked('idevnamevalid')" class="form-control" id="devname1" name="devname" placeholder="light 1">
+                    <p id="idevnamevalid" style="color: red;display: none" > *Please provide a device name*</p>
+                 </div>
+                 <div class="form-group">
+                    <label class="labels" for="stopic">Subscribe Topic</label>
+                    <input " type="text" id="devstopic" class="form-control"  name="stopic" placeholder="TOPIC/LIGHT/LIGHT1/FEEDBACK">
+                    <p id="ldevstopic" style="color: red;display: none" > *Please provide a device name*</p>
+                 </div>
+                  <div class="form-group">
+                    <label class="labels" for="ptopic">Publish Topic</label>
+                    <input  type="text" id="devptopic" class="form-control" name="ptopic" placeholder="TOPIC/LIGHT/LIGHT1/SWITCH">
+                    <p id="ldevptopic" style="color: red;display: none" > *Please provide a device name*</p>
+                 </div>
+                
+                 <!--<button type="submit" class="btn btn-default" style="float: right" id="conSubmit" ">Submit</button> -->
+                 <div class="text-right">
+                    <button type="button" id="removelightdevice" class="btn btn-danger"   style="float:left" >Delete</button>
+                 <input class = "btn btn-secondary" type = "button" id="editlightdevicesave" value ="Save"/>
+             <button type="button" class="btn btn-primary" data-dismiss="modal" >Cancel</button>
+            </div>    
+            </form>
+          </div>
+        
+        </div>
+      </div>
+    </div>
+    <!-- END OF ADD LIGHT DEVICE MODAL -->
+
+
+
+
+<!-- ALL SOCKET -->
+<div class="modal fade"  id="viewalloutletmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document"  >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">All Outlet</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" >
+          <div style="text-align:center">
+            <button id="omodalmainbuttons" class="modalmainbuttons" onclick="onalloutlet()" style="background-image: url('icons/allsocketoff.png'); "></button>
+            <button id="omodalmainbuttons" class="modalmainbuttons" onclick="offalloutlet()" style="background-image: url('icons/allsocketon.png'); "></button>
+          </div>
+          <div   class="container" style="margin-top:2px;margin-bottom: 1px ; text-align: center;height: 31em;overflow-y:auto" >
+            <div class="row" id="outletbox">
+              
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary footerbutttons" data-dismiss="modal" >Close</button>
+          <button type="button" data-toggle="modal" data-target="#addoutletdevice" class="btn btn-primary footerbutttons">Add Outlet Device  <i class="	fa fa-plug"></i>   </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+
+
+
+
+ <!-- START OF INFO MODAL -->
+ <div class="modal fade" id="addoutletdevice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Add Light Device</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form id="oadddeviceform">
+          
+             <div class="form-group">
+                <label class="labels" for="odevname">Device Name</label>
+                <input type="text"  onclick="clicked('odevnamevalid')" class="form-control" id="odevname" name="odevname" placeholder="light 1">
+                <p id="odevnamevalid" style="color: red;display: none" > *Please provide a device name*</p>
+             </div>
+             <div class="form-group">
+                <label class="labels" for="ostopic">Subscribe Topic</label>
+                <input  type="text" class="form-control" id="ostopic" name="ostopic" placeholder="TOPIC/SOCKET/SOCKET1/FEEDBACK">
+                <p id="odevstopic" style="color: red;display: none" > *Please provide a device name*</p>
+             </div>
+              <div class="form-group">
+                <label class="labels" for="optopic">Publish Topic</label>
+                <input  type="text"  class="form-control" id="optopic" name="optopic" placeholder="TOPIC/SOCKET/SOCKET1/SWITCH">
+                <p id="odevptopic" style="color: red;display: none" > *Please provide a device name*</p>
+             </div>
+            
+             <!--<button type="submit" class="btn btn-default" style="float: right" id="conSubmit" ">Submit</button> -->
+             <div class="text-right">
+             <input class = "btn btn-secondary" type = "button" onclick="addoutletvalidate(this.form.odevname.value,this.form.ostopic.value,this.form.optopic.value)" value ="Save"/>
+         <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cancel</button>
+        </div>    
+        </form>
+      </div>
+    
+    </div>
+  </div>
+</div>
+<!-- END OF ADD LIGHT DEVICE MODAL -->
+
+
+ 
+<div class="modal fade" id="editoutletdevice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Edit Outlet Device</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form id="oadddeviceform">
+            <p hidden id="ohdevname1"></p>
+            <p hidden id="ohdevstopic"></p>
+            <p hidden id="ohdevptopic"></p>
+            <p hidden id="ohdevice"></p>
+             <div class="form-group">
+                <label class="labels" for="odevname">Device Name</label>
+                <input type="text"  onclick="clicked('oidevnamevalid')" class="form-control" id="odevname1" name="devname" placeholder="light 1">
+                <p id="oidevnamevalid" style="color: red;display: none" > *Please provide a device name*</p>
+             </div>
+             <div class="form-group">
+                <label class="labels" for="ostopic">Subscribe Topic</label>
+                <input type="text" id="odevstopic1" class="form-control"  name="ostopic" placeholder="TOPIC/SOCKET/SOCKET1/FEEDBACK">
+                <p id="oldevstopic" style="color: red;display: none" > *Please provide a device name*</p>
+             </div>
+              <div class="form-group">
+                <label class="labels" for="optopic">Publish Topic</label>
+                <input  type="text" id="odevptopic1" class="form-control" name="optopic" placeholder="TOPIC/SOCKET/SOCKET1/SWITCH">
+                <p id="oldevptopic" style="color: red;display: none" > *Please provide a device name*</p>
+             </div>
+            
+             <!--<button type="submit" class="btn btn-default" style="float: right" id="conSubmit" ">Submit</button> -->
+             <div class="text-right">
+                <button type="button" id="removeoutletdevice" class="btn btn-danger"   style="float:left" >Delete</button>
+             <input class = "btn btn-secondary" type = "button" id="editoutletdevicesave" value ="Save"/>
+         <button type="button" class="btn btn-primary" data-dismiss="modal" >Cancel</button>
+        </div>    
+        </form>
+      </div>
+    
+    </div>
+  </div>
+</div>
+<!-- END OF ADD LIGHT DEVICE MODAL -->
+
+<!-- START OF HELP MODAL -->
+<div class="modal fade" id="camera1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Camera</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Camera
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END OF HELP MODAL -->
+
+
+
+<div class="modal fade" id="viewelecmetermodal" role="dialog">
+  <div class="modal-dialog modal-lg">   
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle" >Power Meter Monitoring</h5>
+           
+          <button type="button" class="close" data-dismiss="modal">&times;</button>   
+        
+      </div>
+      <div class="modal-body">
+          <div class="container" style="min-width:99% ;margin-top:0px;margin-bottom: 0px " >
+              <div class="row " >
+                  <div class="col-12  col-sm-12 col-md-12 col-lg-12 paddingpower" style="position: relative;text-align: center;font-size: 2em" ><i class="fa fa-dashboard" ></i>  Power Reading  <i class="fa fa-dashboard" ></i></div>
+              </div>
+              <div class="row " >
+                  <div class="col-6  col-sm-6 col-md-6 col-lg-6 paddingpower1" style="position: relative;text-align: center;" >
+                   <p id="tyreading"style="padding-bottom:1px;margin-bottom:0px;font-size:1.8em;border: 1px dotted cornflowerblue;color:coral">0.25 kwH</p>
+                   <p>Today's Reading</p>
+                 </div>
+                 <div class="col-6  col-sm-6 col-md-6 col-lg-6 paddingpower1" style="position: relative;text-align: center;" >
+                  <p id="ttreading"style="padding-bottom:1px;margin-bottom:0px;font-size:1.8em;border: 1px dotted cornflowerblue;color:coral">0.25 kwH</p>
+                  <p>Total Reading</p>  
+                </div>
+              </div>
+             
+              <div class="col-12  col-sm-12 col-md-12 col-lg-12  paddingpower2" style="position: relative;margin-top: 2px; justify-content: center; border-bottom: 1px solid rgb(173, 173, 173) ;border-top: 1px solid rgb(173, 173, 173) ;"  >
+                <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width:50%; margin: 0 auto;" class="align-self-center">
+                  <i class="fa fa-calendar" ></i>&nbsp;
+                  <span></span> <i class="fa fa-caret-down" style="float:right"></i>
+              </div>
+           </div>
+
+           <div class="col-12  col-sm-12 col-md-12 col-lg-12" style="position: relative;text-align: center;font-size: 2em;height: 1.5em;text-align: center" >
+            
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#powerreport"  style="width:50%"> <i class="fa fa-book"></i> <strong> GET POWER CONSUMPTION REPORT </strong></button> 
+            
+            </div>
+            <div class="col-12  col-sm-12 col-md-12 col-lg-12 paddingpowerchart" style="position: relative" >
+            <div id="chartContainer1" style="height: 35em; width: 100%;"></div>
+            </div>
+  
+            <div class="modal-footer" st>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+
+
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- START OF VIEW MPPT MODAL -->
+<div class="modal fade" id="viewmpptmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">MPPT SOLAR PANEL</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="container" style="min-width:99% ;margin-top:0px;margin-bottom: 0px ">
+             <div class="row " id="socketmodal">
+                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 "  style="justify-content:center;align-content: center; padding:1.8px;; height: 2.5em;">
+           <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style="justify-content: center;align-content: center;">
+           <li class="nav-item" onclick="setTimeout(charttemprender, 250)">
+             <a class="nav-link active"  onclick="setTimeout(charttemprender, 250)"  id="pills-temp-tab" data-toggle="pill" href="#pills-temp" role="tab" aria-controls="pills-temp" aria-selected="true">Temperature <i class="fa fa-thermometer" ></i></a>
+           </li>
+           <li class="nav-item" onclick="setTimeout(chartvoltrender, 250)">
+             <a class="nav-link"   onclick="setTimeout(charttemprender, 250)"id="pills-volt-tab" data-toggle="pill" href="#pills-volt" role="tab" aria-controls="pills-volt" aria-selected="false">Voltage  <i class="	fa fa-get-pocket   " ></i></a>
+           </li>
+           <li class="nav-item" onclick="setTimeout(chartcurrender, 250)">
+             <a class="nav-link"  onclick="setTimeout(charttemprender, 250)" id="pills-cur-tab" data-toggle="pill" href="#pills-cur" role="tab" aria-controls="pills-cur" aria-selected="false">Current  <i class="	fa fa-bolt" ></i></a>
+           </li>
+         </ul>
+         </div>
+             </div>
+          </div>
+         <div class="tab-content" id="pills-tabContent">
+           <div class="tab-pane fade show active" id="pills-temp" role="tabpanel" aria-labelledby="pills-temp-tab">
+              <div class="container" style="min-width:99% ;margin-top:0px;margin-bottom: 0px">
+                  <div class="row">
+                      <div class="col-12  col-sm-12 col-md-12 col-lg-12 " style="position: relative;text-align: center;font-size: 2em;padding:1.8px;; height: 1.8em;" ><i class="fa fa-thermometer" ></i>  Temperature  <i class="fa fa-thermometer" ></i></div>
+                      <div class="col-12  col-sm-12 col-md-12 col-lg-12 " style="position: relative;text-align: center;font-size: 2em ;padding:1.8px; height: 4em;" >
+                          <p id="tyreading1"style="padding-bottom:1px;margin-bottom:0px;font-size:1.5em;border: 1px dotted cornflowerblue;color:coral">0.25 °C</p>
+                          <p style="font-size:.8em">Current Reading</p>
+                      </div>
+                      <div class="col-12  col-sm-12 col-md-12 col-lg-12   " style="position: relative;margin-top: 2px; justify-content: center; border-bottom: 1px solid rgb(173, 173, 173) ;border-top: 1px solid rgb(173, 173, 173);background-color: rgb(207, 207, 207);padding:1.8px; height: 2.5em; "  >
+                          <div id="reportranget" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width:50%; margin: 0 auto;" class="align-self-center">
+                            <i class="fa fa-calendar" ></i>&nbsp;
+                            <span></span> <i class="fa fa-caret-down" style="float:right"></i>
+                        </div>
+                     </div>
+                     <div class="col-12  col-sm-12 col-md-12 col-lg-12 " style="position: relative" >
+                        <br>
+                    </div>
+                      <div class="col-12  col-sm-12 col-md-12 col-lg-12 " style="position: relative;padding:1.8px; height: 30em;" >
+                        <p hidden id="tempchosendate"></p>
+                          <div id="chartContainertemp" style="height: 30em; width: 100%;"></div>
+                          <!--<div id="chartContainertemp2" style="height: 30em; width: 100%;"></div>-->  
+                      </div>
+                  </div>
+              </div>
+           </div>
+           <div class="tab-pane fade" id="pills-volt" role="tabpanel" aria-labelledby="pills-volt-tab">
+              <div class="container" style="min-width:99% ;margin-top:0px;margin-bottom: 0px">
+                  <div class="row">
+                      <div class="col-12  col-sm-12 col-md-12 col-lg-12 " style="position: relative;text-align: center;font-size: 2em;padding:1.8px;; height: 1.8em;" ><i class="fa fa-get-pocket " ></i>  Voltage  <i class="fa fa-get-pocket " ></i></div>
+                      <div class="col-12  col-sm-12 col-md-12 col-lg-12 " style="position: relative;text-align: center;font-size: 2em;padding:1.8px; height: 4em;" >
+                          <p id="tyreading2"style="padding-bottom:1px;margin-bottom:0px;font-size:1.5em;border: 1px dotted cornflowerblue ;color:coral">0.25 V</p>
+                          <p style="font-size:.8em">Current Reading</p>
+                      </div>
+                      <div class="col-12  col-sm-12 col-md-12 col-lg-12  " style="position: relative;margin-top: 2px; justify-content: center; border-bottom: 1px solid rgb(173, 173, 173) ;border-top: 1px solid rgb(173, 173, 173);background-color: rgb(207, 207, 207) ;padding:1.8px; height: 2.5em;  "  >
+                          <div id="reportrangev" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width:50%; margin: 0 auto;" class="align-self-center">
+                            <i class="fa fa-calendar" ></i>&nbsp;
+                            <span></span> <i class="fa fa-caret-down" style="float:right"></i>
+                        </div>
+                     </div>
+                     <div class="col-12  col-sm-12 col-md-12 col-lg-12 " style="position: relative" >
+                        <br>
+                    </div>
+                      <div class="col-12  col-sm-12 col-md-12 col-lg-12 " style="position: relative;padding:1.8px; height: 30em;" >
+                          <div id="chartContainervolt" style="height: 30em; width: 100%;"></div>
+                          <div id="chartContainervolt2" style="height: 30em; width: 100%;"></div>
+                      </div>
+                  </div>
+              </div>
+           </div>
+           <div class="tab-pane fade" id="pills-cur" role="tabpanel" aria-labelledby="pills-cur-tab">
+              <div class="container" style="min-width:99% ;margin-top:0px;margin-bottom: 0px">
+                  <div class="row">
+                      <div class="col-12  col-sm-12 col-md-12 col-lg-12 " style="position: relative;text-align: center;font-size: 2em;padding:1.8px;; height: 1.8em;" ><i class="fa fa-bolt " ></i>  Current  <i class="fa fa-bolt" ></i></div>
+                      <div class="col-12  col-sm-12 col-md-12 col-lg-12 " style="position: relative;text-align: center;font-size: 2em;padding:1.8px; height: 4em;" >
+                          <p id="tyreading3"style="padding-bottom:1px;margin-bottom:0px;font-size:1.5em;border: 1px dotted cornflowerblue;color:coral">0.25 A</p>
+                          <p  style="font-size:.8em">Current Reading</p>
+                      </div>
+                      <div class="col-12  col-sm-12 col-md-12 col-lg-12  " style="position: relative;margin-top: 2px; justify-content: center; border-bottom: 1px solid rgb(173, 173, 173) ;border-top: 1px solid rgb(173, 173, 173);background-color: rgb(207, 207, 207);padding:1.8px; height: 2.5em; "    >
+                          <div id="reportrangec" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width:50%; margin: 0 auto;" class="align-self-center">
+                            <i class="fa fa-calendar" ></i>&nbsp;
+                            <span></span> <i class="fa fa-caret-down" style="float:right"></i>
+                        </div>
+                     </div>
+                     <div class="col-12  col-sm-12 col-md-12 col-lg-12 " style="position: relative" >
+                        <br>
+                    </div>
+                      <div class="col-12  col-sm-12 col-md-12 col-lg-12 padding" style="position: relative;padding:1.8px; height: 36em;" >
+                          <div id="chartContainercur" style="height: 35em; width: 100%;"></div>
+                         
+                      </div>
+                  </div>
+              </div>
+          </div>
+  
+           </div>
+         </div>
+    
+    </div>
+  </div>
+</div>
+<!-- END OF VIEW MPPT MODAL -->
+
+
+
+ <!-- START OF INFO MODAL -->
+ 
+ <div class="modal fade" id="powerreport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Power Consumption Report</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+          <table id="powertable" class="display" style="width:100%">
+                  <thead>
+                      <tr>
+                          <th>Date</th>
+                          <th>Time</th>
+                          <th>Reading</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                      
+                          <td>61</td>
+                          <td>2011/04/25</td>
+                          <td>$320,800</td>
+                      </tr>
+                      <tr>
+                          
+                          <td>63</td>
+                          <td>2011/07/25</td>
+                          <td>$170,750</td>
+                      </tr>
+                      <tr>
+                         
+                          <td>66</td>
+                          <td>2009/01/12</td>
+                          <td>$86,000</td>
+                      </tr>
+                      <tr>
+
+                          <td>22</td>
+                          <td>2012/03/29</td>
+                          <td>$433,060</td>
+                      </tr>
+                     
+                  </tbody>
+                  <tfoot>
+                      <tr>
+                          <th>Date</th>
+                          <th>Time</th>
+                          <th>Reading</th>
+                      </tr>
+                  </tfoot>
+              </table>
+
+
+
+    
+      </div>
+    
+    </div>
+  </div>
+</div>
+<!-- END OF ADD LIGHT DEVICE MODAL -->
+
+
+<script>
+$(document).ready(function() {
+    var printCounter = 0;
+ 
+    // Append a caption to the table before the DataTables initialisation
+   
+ 
+    $('#powertable').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy',
+            {
+                extend: 'excel',
+                title: "MQTT TEMPERATURE REPORT",
+                messageTop: 'DATE RANGE: April 02, 2019 - April 21, 2019',
+                
+            },
+         
+            {
+                extend: 'print',
+                messageTop: function () {
+                    printCounter++;
+ 
+                    if ( printCounter === 1 ) {
+                        return 'This is the first time you have printed this document.';
+                    }
+                    else {
+                        return 'You have printed this document '+printCounter+' times';
+                    }
+                },
+                messageBottom: null
+            }
+        ]
+    } );
+} );</script>
+
+
+
+
+
+
+
+</body>
+
+
+
+<script>
+function offalldevice(){
+  
+  var nolights = document.getElementsByClassName('lightdevice').length;
+
+    for (i=0; i < nolights;i++){
+      var topic = document.getElementsByClassName('lightdevice')[i].id;
+       publishmsg(topic,"LOFF");
+
+  }
+  var nooutlet = document.getElementsByClassName('outletdevice').length;
+  for (i=0; i < nooutlet;i++){
+      var topic = document.getElementsByClassName('outletdevice')[i].id;
+       publishmsg(topic,"SOFF");
+
+  }
+
+
+}
+
+function onalldevice(){
+  
+  var nolights = document.getElementsByClassName('lightdevice').length;
+
+    for (i=0; i < nolights;i++){
+      var topic = document.getElementsByClassName('lightdevice')[i].id;
+       publishmsg(topic,"LON");
+
+  }
+  var nooutlet = document.getElementsByClassName('outletdevice').length;
+  for (i=0; i < nooutlet;i++){
+      var topic = document.getElementsByClassName('outletdevice')[i].id;
+       publishmsg(topic,"SON");
+
+  }
+
+
+}
+
+
+/*function controllalldevice(){
+  var imgsrc =  document.getElementById('controlall').style.backgroundImage;
+  var nolights = document.getElementsByClassName('lightdevice').length;
+  alert(nolights);
+    for (i=0; i < nolights;i++){
+    if (imgsrc == 'url("icons/shuthouse.png")'){
+      var topic = document.getElementsByClassName('lightdevice')[i].id;
+       publishmsg(topic,"LOFF");
+    }
+    if (imgsrc == 'url("icons/openhouse.png")'){
+      var topic = document.getElementsByClassName('lightdevice')[i].id;
+      publishmsg(topic,"LON");
+    }
+  }
+  var nooutlet = document.getElementsByClassName('outletdevice').length;
+  for (i=0; i < nooutlet;i++){
+    if (imgsrc == 'url("icons/shuthouse.png")'){
+      var topic = document.getElementsByClassName('outletdevice')[i].id;
+       publishmsg(topic,"SOFF");
+    }
+    if (imgsrc == 'url("icons/openhouse.png")'){
+      var topic = document.getElementsByClassName('outletdevice')[i].id;
+      publishmsg(topic,"SON");
+    }
+  }
+
+  if (imgsrc == 'url("icons/shuthouse.png")'){
+    document.getElementById('modalmainbuttons').style.backgroundImage = 'url("icons/alllightoff.png")';
+  }
+  else if (imgsrc == 'url("icons/openhouse.png")'){
+    document.getElementById('modalmainbuttons').style.backgroundImage = 'url("icons/alllighton.png")';
+  }
+  if (imgsrc == 'url("icons/shuthouse.png")'){
+    document.getElementById('omodalmainbuttons').style.backgroundImage = 'url("icons/allsocketoff.png")';
+  }
+  else if (imgsrc == 'url("icons/openhouse.png")'){
+    document.getElementById('omodalmainbuttons').style.backgroundImage = 'url("icons/allsocketon.png")';
+  }
+  if (imgsrc == 'url("icons/shuthouse.png")'){
+    document.getElementById('controlall').style.backgroundImage = 'url("icons/openhouse.png")';
+  }
+  else if (imgsrc == 'url("icons/openhouse.png")'){
+    document.getElementById('controlall').style.backgroundImage = 'url("icons/shuthouse.png")';
+  }
+}*/
+</script>
+<script>
+//MQTT CONNECTION
+$(document).ready(function(){
+  Login("192.168.2.100","9001","asdadgdf","pismarthome","pismarthome123","hello");
+  $(document).on("tap", "button.addedbuttons" , function() {
+     var topic = $(this).parent("div").find('input').attr('id');
+     var id = $(this).parent("div").find('input').val();
+
+     publishmsg(topic,id);
+     
+   });
+   $(document).on("tap", "button.oaddedbuttons" , function() {
+     var topic = $(this).parent("div").find('input').attr('id');
+     var id = $(this).parent("div").find('input').val();
+
+     publishmsg(topic,id);
+     
+   });
+  $(document).on("taphold", "button.addedbuttons" , function() {
+    var selectedstopic = $(this).attr('name');
+    var selecteddevice = $(this).attr('id');
+    var selectedptopic = $(this).parent('div').find('input').attr('id');
+    var selecteddevname = $(this).text();
+    
+    document.getElementById("hdevname1").innerHTML = selecteddevname;
+    document.getElementById("hdevstopic").innerHTML = selectedstopic;
+    document.getElementById("hdevptopic").innerHTML = selectedptopic;
+    document.getElementById("hdevice").innerHTML = selecteddevice;
+
+
+    document.getElementById("devname1").value = selecteddevname;
+    document.getElementById("devstopic").value = selectedstopic;
+    document.getElementById("devptopic").value = selectedptopic;
+   $('#editlightdevice').modal('show');
+  });
+ 
+  $(document).on("taphold", "button.oaddedbuttons" , function() {
+    var selectedstopic = $(this).attr('name');
+    var selecteddevice = $(this).attr('id');
+    var selectedptopic = $(this).parent('div').find('input').attr('id');
+    var selecteddevname = $(this).text();
+    
+   document.getElementById("ohdevname1").innerHTML = selecteddevname;
+    document.getElementById("ohdevstopic").innerHTML = selectedstopic;
+    document.getElementById("ohdevptopic").innerHTML = selectedptopic;
+    document.getElementById("ohdevice").innerHTML = selecteddevice;
+
+    document.getElementById("odevname1").value = selecteddevname;
+    document.getElementById("odevstopic1").value = selectedstopic;
+   document.getElementById("odevptopic1").value = selectedptopic; 
+   $('#editoutletdevice').modal('show');
+  });
+
+  
+  $("#removelightdevice").on("click", function(){
+      var x = $(this).closest("form").find('p[id="hdevice"]').text();
+      $("." + x + "").remove();
+   
+ });
+
+ $("#removeoutletdevice").on("click", function(){
+      var x = $(this).closest("form").find('p[id="ohdevice"]').text();
+      $("." + x + "").remove();
+      $('#editoutletdevice').modal('hide');
+   
+ });
+
+
+ $("#editlightdevicesave").on("click", function(){
+
+
+   var devname = document.getElementById('hdevname1').innerHTML;
+   var stopic =document.getElementById('hdevstopic').innerHTML;
+   var ptopic =document.getElementById('hdevptopic').innerHTML;
+   var device = document.getElementById('hdevice').innerHTML;
+  
+   var idevname = document.getElementById('devname1').value;
+   var istopic =document.getElementById('devstopic').value;
+   var iptopic =document.getElementById('devptopic').value;
+  if (name == "" ) {
+    var x = document.getElementById("idevnamevalid");
+    x.style.display = "block";
+  }
+  else{
+     
+       $("." + device + "").children("input").attr('id' , iptopic);
+       $("." + device + "").children("input").attr('name',  "mqtt"  + istopic);
+     $("." + device + "").children("button").attr('name', istopic);
+      $("." + device + "").children("button").text(idevname) ;
+
+$('#editlightdevice').modal('hide');
+alert("Light Device has been edited");
+  }
+   
+ });
+
+
+
+ $("#editoutletdevicesave").on("click", function(){
+
+
+var devname = document.getElementById('ohdevname1').innerHTML;
+var stopic =document.getElementById('ohdevstopic').innerHTML;
+var ptopic =document.getElementById('ohdevptopic').innerHTML;
+var device = document.getElementById('ohdevice').innerHTML;
+
+var idevname = document.getElementById('odevname1').value;
+var istopic =document.getElementById('odevstopic1').value;
+var iptopic =document.getElementById('odevptopic1').value;
+if (name == "" ) {
+ var x = document.getElementById("oidevnamevalid");
+ x.style.display = "block";
+}
+else{
+    $("." + device + "").children("input").attr('id' , iptopic);
+    $("." + device + "").children("input").attr('name',  "mqtt"  + istopic);
+  $("." + device + "").children("button").attr('name', istopic);
+   $("." + device + "").children("button").text(idevname) ;
+$('#editoutletdevice').modal('hide');
+alert("Outlet Device has been edited");
+}
+
+});
+
+
+
+
+
+});
+var mqttClient;
+/*Callback for successful MQTT connection */
+function onConnect() {
+  try{
+	console.log("Connected kana");
+  document.getElementById('status').textContent = "Connected";
+  currentuser = document.getElementById('userlog').textContent ;
+  var d = new Date();
+  var curdate = d.getFullYear() + "-" + (d.getMonth()+ 1) + "-" +d.getDate();
+ 
+  mqttClient.subscribe("TOPIC/+/+/FEEDBACK");
+  mqttClient.subscribe("SUB1");
+	mqttClient.subscribe("TOPIC/UTIL/CHAT/RECMSG");
+	mqttClient.subscribe("TOPIC/UTIL/CHAT/SENDALL");
+  mqttClient.subscribe("TOPIC/UTIL/ELECT/RECMSG");
+  mqttClient.subscribe("TOPIC/UTIL/ELECT/SENDALL");
+  mqttClient.subscribe("TOPIC/UTIL/TEMP/RECMSG");
+  mqttClient.subscribe("TOPIC/UTIL/TEMP/SENDALL");
+	publishmsg("connected", "connected");
+  publishmsg("TOPIC/UTIL/CHAT/ALLMSG",currentuser);
+  mqttClient.onMessageArrived = onMessageArrived;
+}
+catch(err){
+  console.log("ERROR"  + err);
+}
+}
+
+function Login(lhost,lport,lclientid,lusername,lpassword,stat){
+var hostname = lhost;
+var port = parseInt(lport);
+var username = lusername;
+var password= lpassword;
+var clientId = lclientid;
+	try { 
+	mqttClient = new Paho.MQTT.Client(hostname, port,clientId);
+	mqttClient.connect({
+		onFailure: ConnectionFailed,
+		keepAliveInterval: 60,
+		userName: username,
+		useSSL: false,	
+		password: password,
+    onSuccess: onConnect,	
+	});	
+	}
+	catch(err) {
+		alert("Please check your setup connections \n" + err);
+	  }
+}
+
+function onMessageArrived(r_message){
+	var rev_tpc = r_message.destinationName;
+   var out_msq = r_message.payloadString;
+ 
+  console.log(rev_tpc);
+if (rev_tpc == "TOPIC/UTIL/CHAT/RECMSG") {
+  console.log(out_msq);
+	chatmsg(out_msq);
+}
+else if (rev_tpc == "TOPIC/UTIL/CHAT/SENDALL"){
+	chatall(out_msq);
+}
+else if (rev_tpc == "TOPIC/UTIL/ELECT/RECMSG"){
+elecmetermsg(out_msq);
+}
+else if (rev_tpc == "TOPIC/UTIL/ELECT/SENDALL"){
+elecall(out_msq);
+}
+else if (rev_tpc == "TOPIC/UTIL/TEMP/RECMSG"){
+
+if (out_msq == "temp"){
+var x = document.getElementById('tempchosendate').innerHTML;
+var msg = x  + "/" + document.getElementById('userlog').textContent;
+publishmsg("TOPIC/UTIL/TEMP/ALLMSG" , msg );
+}
+
+
+}
+else if (rev_tpc == "TOPIC/UTIL/TEMP/SENDALL"){
+
+tempall(out_msq);
+}
+else {
+  if (out_msq == "LON"){
+    var x= document.getElementsByName(rev_tpc).length;
+    for (i=0; i<x;i++){
+      document.getElementsByName(rev_tpc)[i].style.backgroundImage = 'url("icons/lightswitchon.png")';
+      document.getElementsByName("mqtt" + rev_tpc )[i].value = "LOFF";
+     
+    }
+	}
+	else if (out_msq == "LOFF"){
+	  var x= document.getElementsByName(rev_tpc).length;
+    for (i=0; i<x;i++){
+      document.getElementsByName(rev_tpc)[i].style.backgroundImage = 'url("icons/lightswitchoff.png")';
+      document.getElementsByName("mqtt" + rev_tpc)[i].value = "LON";
+ 
+    }
+  }
+
+  //madama
+  if (out_msq == "SON"){
+    var x= document.getElementsByName(rev_tpc).length;
+    for (i=0; i<x;i++){
+      document.getElementsByName(rev_tpc)[i].style.backgroundImage = 'url("icons/socketon.png")';
+      document.getElementsByName("mqtt" + rev_tpc )[i].value = "SOFF";
+     
+    }
+	}
+	else if (out_msq == "SOFF"){
+	  var x= document.getElementsByName(rev_tpc).length;
+    for (i=0; i<x;i++){
+      document.getElementsByName(rev_tpc)[i].style.backgroundImage = 'url("icons/socketoff.png")';
+      document.getElementsByName("mqtt" + rev_tpc)[i].value = "SON";
+ 
+    }
+	}
+}
+}
+
+
+
+function ConnectionFailed(res) {
+	alert("error");
+	console.log("Connect failed:" + res.errorMessage);
+	document.getElementById('status').textContent = " Not Connected";
+}
+
+/*Callback for lost connection*/
+function ConnectionLost(res) {
+  if (res.errorCode != 0) {
+	  
+	console.log("Connection lost:" + res.errorMessage);
+	document.getElementById('connecttypebutton').textContent = "Not Connected";
+	Connect();
+  }
+}
+
+function publishmsg(topic,message){
+		try {
+      var message1 = new Paho.MQTT.Message(message);
+    	message1.destinationName = topic;
+	    mqttClient.send(message1);
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+nochat=0
+  function chatmsg(msg){
+	nochat++;
+	var cmsg = msg;
+	var name = "";
+    var date = "";
+    var n  = 0 ;
+	n = cmsg.indexOf("$");	
+    date = cmsg.substring(0, n);
+ 
+	cmsg = cmsg.replace(date + "$" , "");
+
+  	n = cmsg.indexOf(":");
+    name = cmsg.substring(0,n);
+ 	cmsg = cmsg.replace(name + ":", "");
+	currentname = document.getElementById('userlog').textContent
+  console.log("date : " + date + "   name :  " + name + "     msg  :  " + cmsg );
+
+  
+	if (currentname != name){
+
+		var maindiv = document.createElement("div");
+		maindiv.id = "msg" + nochat;
+		(document.getElementById('chatbox')).appendChild(maindiv);
+
+		var column = document.createElement("div");
+		column.className = "flexleft";
+		maindiv.appendChild(column); 
+
+		var div1 = document.createElement("div");
+		column.appendChild(div1);
+
+		var divname = document.createElement("div");
+		divname.className = "ochatname";
+		divname.textContent = name;
+		div1.appendChild(divname);
+
+		var column2 = document.createElement("div");
+		column2.className = "flexleft";
+		maindiv.appendChild(column2); 
+
+		var div2 = document.createElement("div");
+		column2.appendChild(div2);
+
+		var divmsg = document.createElement("div");
+		divmsg.className = "ochatmsg";
+		divmsg.textContent = cmsg;
+		div2.appendChild(divmsg);
+
+		var column3 = document.createElement("div");
+		column3.className = "flexleft";
+		maindiv.appendChild(column3); 
+
+		var div3 = document.createElement("div");
+		column3.appendChild(div3);
+
+		var divdate = document.createElement("div");
+		divdate.className = "ochattime";
+		divdate.textContent = date;
+		div3.appendChild(divdate);
+	}
+	else if (currentname == name){
+
+		var maindiv = document.createElement("div");
+		maindiv.id = "msg" + nochat;
+		(document.getElementById('chatbox')).appendChild(maindiv);
+
+
+		var column2 = document.createElement("div");
+		column2.className = "flexright";
+		maindiv.appendChild(column2); 
+
+		var div2 = document.createElement("div");
+		column2.appendChild(div2);
+
+		var divmsg = document.createElement("div");
+		divmsg.className = "schatmsg";
+		divmsg.textContent = cmsg;
+		div2.appendChild(divmsg);
+
+		var column3 = document.createElement("div");
+		column3.className = "flexright";
+		maindiv.appendChild(column3); 
+
+		var div3 = document.createElement("div");
+		column3.appendChild(div3);
+
+		var divdate = document.createElement("div");
+		divdate.className = "schattime";
+		divdate.textContent = date;
+		div3.appendChild(divdate);
+
+  }
+}
+	 
+
+  
+  function chatall(msg){
+    currentname1 = document.getElementById('userlog').textContent
+    
+nochat =0;
+var cmsg = msg;
+var cmsg1 = msg;
+var n  = 0 ;
+
+  n = cmsg.indexOf("~m#q<tuser>t~");
+  setmsg = cmsg.substring(0, n);
+  cmsg = cmsg.replace(setmsg + "~m#q<tuser>t~", "");
+      setmsg1 = cmsg1.substring(0, n);
+  mes = cmsg1.replace(setmsg1 + "~m#q<tuser>t~", "");
+  if (setmsg != currentname1){
+   
+  }
+  else {
+if(mes == "" || mes == " " ){
+
+}
+ else {
+  var search = new RegExp(/~m#q<t>t~/g);
+  var count = cmsg.match(search).length;
+  var name = "";
+    var date = ""; 
+    var setmsg = "";
+
+  for (a=0;a<count;a++){
+  nochat++;
+      n = cmsg.indexOf("~m#q<t>t~");	
+      setmsg = cmsg.substring(0, n);
+      cmsg = cmsg.replace(setmsg + "~m#q<t>t~", "");
+//				cmsg = cmsg.replace(date + "$" + name + ":" + setmsg + "~m$q#t*t~", "");
+      n = setmsg.indexOf("$");
+      date = setmsg.substring(0,n);
+        setmsg = setmsg.replace(date + "$","");
+      n = setmsg.indexOf(":");
+      name = setmsg.substring(0,n);
+      setmsg = setmsg.replace(name + ":" , "");
+  
+    console.log("date :  " + date + "name :  "  + name + " msg  :   " + setmsg + " endof msg");
+    currentname = document.getElementById('userlog').textContent
+    if (currentname != name){
+
+      var maindiv = document.createElement("div");
+      maindiv.id = "msg" + nochat;
+      (document.getElementById('chatbox')).appendChild(maindiv);
+  
+      var column = document.createElement("div");
+      column.className = "flexleft";
+      maindiv.appendChild(column); 
+  
+      var div1 = document.createElement("div");
+      column.appendChild(div1);
+  
+      var divname = document.createElement("div");
+      divname.className = "ochatname";
+      divname.textContent = name;
+      div1.appendChild(divname);
+  
+      var column2 = document.createElement("div");
+      column2.className = "flexleft";
+      maindiv.appendChild(column2); 
+  
+      var div2 = document.createElement("div");
+      column2.appendChild(div2);
+  
+      var divmsg = document.createElement("div");
+      divmsg.className = "ochatmsg";
+      divmsg.textContent = setmsg;
+      div2.appendChild(divmsg);
+  
+      var column3 = document.createElement("div");
+      column3.className = "flexleft";
+      maindiv.appendChild(column3); 
+  
+      var div3 = document.createElement("div");
+      column3.appendChild(div3);
+  
+      var divdate = document.createElement("div");
+      divdate.className = "ochattime";
+      divdate.textContent = date;
+      div3.appendChild(divdate);
+    }
+    else if (currentname == name){
+  
+      var maindiv = document.createElement("div");
+      maindiv.id = "msg" + nochat;
+      (document.getElementById('chatbox')).appendChild(maindiv);
+  
+  
+      var column2 = document.createElement("div");
+      column2.className = "flexright";
+      maindiv.appendChild(column2); 
+  
+      var div2 = document.createElement("div");
+      column2.appendChild(div2);
+  
+      var divmsg = document.createElement("div");
+      divmsg.className = "schatmsg";
+      divmsg.textContent = setmsg;
+      div2.appendChild(divmsg);
+  
+      var column3 = document.createElement("div");
+      column3.className = "flexright";
+      maindiv.appendChild(column3); 
+  
+      var div3 = document.createElement("div");
+      column3.appendChild(div3);
+  
+      var divdate = document.createElement("div");
+      divdate.className = "schattime";
+      divdate.textContent = date;
+      div3.appendChild(divdate);
+    }
+    }  
+  }
+}
+}  
+
+
+function elecall(msg){
+  var cmsg = msg;
+  currentname1 = document.getElementById('userlog').textContent;
+  var n  = 0 ;
+  n = cmsg.indexOf("~m#q<tuser>t~");
+  setmsg = cmsg.substring(0, n);
+  emsg = cmsg.replace(setmsg + "~m#q<tuser>t~", "");
+
+  if (setmsg != currentname1){
+   
+  }
+  else {
+    if (emsg == "" || emsg == " "){
+    elecnone();
+  }
+  else {
+  dps1 = [];
+  chart.options.data[0].dataPoints= [];
+  chart.render();
+ var amonth = ["Jan", "Feb" , "Mar" , "Apr" ,"May", "Jun", "Jul", "Aug", "Sep" , "Oct", "Nov", "Dec"];
+
+
+		var search = new RegExp(/end/g);
+		var count = emsg.match(search).length;
+		for (a=0;a<count;a++){
+ 
+        n = emsg.indexOf("end");	
+        setmsg = emsg.substring(0, n);  
+				emsg = emsg.replace(setmsg + "end", "");
+				n = setmsg.indexOf(":");
+        date = setmsg.substring(0,n-2);
+        setmsg = setmsg.replace(date + "00:00:00" + "/","");
+        n = date.indexOf("-");
+        year = date.substring(0,n);
+        date = date.replace(year + "-", "");
+        n = date.indexOf("-");
+        month = date.substring(0,n);
+        day = date.replace(month + "-", "");
+       
+        console.log("year" + year + "month" + month +  "day" + day +  "  setmsg" + setmsg)
+               xValue = amonth[parseInt(month) -1 ] + "-" + day
+                yValue = setmsg
+               dps1.push({
+                   y: parseInt(yValue),
+                   label: xValue,
+                });
+        }
+console.log("dps mo   " + dps);
+chart.options.data[0].dataPoints= dps1;
+chart.render();
+console.log("rendered");
+      }
+      }
+}
+
+//madama
+function tempall(msg){
+  var cmsg = msg;
+  
+  currentname1 = document.getElementById('userlog').textContent;
+  var n  = 0 ;
+  n = cmsg.indexOf("~m#q<tuser>t~");
+  setmsg = cmsg.substring(0, n);
+  
+  cmsg = cmsg.replace(setmsg + "~m#q<tuser>t~", "");
+    n = cmsg.indexOf("$");
+    var lastesmsg = cmsg.substring(0, n);
+   
+    emsg = cmsg.replace(lastesmsg + "$", "");
+
+
+  if (setmsg != currentname1){
+   
+  }
+  else {
+    if (emsg == "" || emsg == " "){
+
+    tempnone();
+  }
+  else {
+    
+  dps2 = [];
+  charttemp.options.data[0].dataPoints= [];
+  charttemp.render();
+ var amonth = ["Jan", "Feb" , "Mar" , "Apr" ,"May", "Jun", "Jul", "Aug", "Sep" , "Oct", "Nov", "Dec"];
+
+
+		var search = new RegExp(/end/g);
+    var count = emsg.match(search).length;
+    
+		for (a=0;a<count;a++){
+ 
+        n = emsg.indexOf("end");	
+        setmsg = emsg.substring(0, n);  
+        
+        emsg = emsg.replace(setmsg + "end", "");
+      
+				n = setmsg.indexOf(":");
+        date = setmsg.substring(0,n-2);
+   
+        setmsg = setmsg.replace(date + "" ,"");
+      
+        n = date.indexOf("-");
+        year = date.substring(0,n);
+        date = date.replace(year + "-", "");
+        n = date.indexOf("-");
+        month = date.substring(0,n);
+        day = date.replace(month + "-", "");
+       
+        n = setmsg.indexOf(".");
+        time = setmsg.substring(0,n);
+       
+        setmsg = setmsg.replace(time + ".", "");
+        
+        n = setmsg.indexOf("/");
+        wala = setmsg.substring(0,n);
+        datas = setmsg.replace(wala + "/", "");
+       console.log(datas)
+        console.log("year" + year + "month" + month +  "day" + day +  "  setmsg" + datas)
+               xValue = amonth[parseInt(month) -1 ] + "-" + day + " "  + time
+                yValue = datas
+               dps2.push({
+                 x:xValue,
+                   y: parseInt(yValue),
+                  label: "hello"  ,
+                   
+                });
+        }
+
+charttemp.options.data[0].dataPoints= dps2;
+console.log("dps mo   " + dps2); 
+charttemp.render();
+console.log("rendered");
+      }
+      }
+}
+
+
+
+
+
+
+function elecnone(){
+  dps1 = [];
+  chart.options.data[0].dataPoints= dps1;
+chart.render();
+}
+function tempnone(){
+  dps1 = [];
+  charttemp.options.data[0].dataPoints= dps1;
+charttemp.render();
+}
+function elecmetermsg(msg) {
+  
+  var cmsg = msg;
+  n = cmsg.indexOf("$");	
+  ttreading = cmsg.substring(0, n);
+  console.log(ttreading)  
+  console.log(cmsg)
+  tyreading = cmsg.replace(ttreading + "$", "");
+  console.log(tyreading)
+  document.getElementById('tyreading').innerHTML = tyreading + " kwH";
+	document.getElementById('ttreading').innerHTML = ttreading+ " kwH";
+   //here                       
+  
+
+}
+
+
+  
+//MQTT
+
+
+function chatclick() {
+  var x = document.getElementById("chatboxdiv");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+
+
+
+
+//</sscript>
+
+//<script>
+var dps = [] ;
+var dpst = [] ;
+   var dps1 = [] ;
+   var month = new Array();
+month[0] = "Jan";
+month[1] = "Feb";
+month[2] = "Mar";
+month[3] = "Apr";
+month[4] = "May";
+month[5] = "Jun";
+month[6] = "Jul";
+month[7] = "Aug";
+month[8] = "Sep";
+month[9] = "Oct";
+month[10] = "Nov";
+month[11] = "Dec";
+var d = new Date();
+var mon = month[d.getMonth()];
+var year =[d.getFullYear()];
+
+ 
+    var chart = new CanvasJS.Chart("chartContainer1", {
+      animationEnabled: true,
+	    zoomEnabled: true,
+      theme: "light2",
+      title:{
+		text: "Power Consumption Logs " 
+	}, 
+      axisY: {
+        title: "Power Consumption kWh"
+      },
+      toolTip:{   
+        content: "{name} : {y} kWH"      
+      },
+      data: [{        
+        type: "column",  
+        name: "Consumed",
+        dataPoints: dps
+      }]
+    });
+
+    var charttemp = new CanvasJS.Chart("chartContainertemp", {
+	animationEnabled: true,
+  zoomEnabled: true,
+  theme: "light2", 
+	title:{
+		text: "Daily Temperature Logs " 
+	},
+	axisY :{
+  
+  },
+  axisX: {
+    labelAngle: -30 
+			},
+  data: [{        
+    type: "line",  
+    name: "Consumed",     
+    dataPoints: dpst
+  }]
+});
+
+var charttemp2 = new CanvasJS.Chart("chartContainertemp2", {
+	animationEnabled: true,
+  zoomEnabled: true,
+  theme: "light2", 
+	title:{
+		text: "Daily Temperature Logs " 
+	},
+	axisY :{
+
+	},
+  data: [{        
+    type: "line",  
+    name: "Consumed",     
+		dataPoints: [
+			{ y: 450 },
+			{ y: 414},
+			{ y: 520, indexLabel: "highest",markerColor: "red", markerType: "triangle" },
+			{ y: 460 },
+	
+		]
+	}]
+});
+
+
+
+
+var chartvolt = new CanvasJS.Chart("chartContainervolt", {
+	animationEnabled: true,
+  zoomEnabled: true,
+  theme: "light2", 
+	title:{
+		text: "Daily Voltage Logs " 
+	},
+	axisY :{
+
+	},
+  data: [{        
+    type: "line",  
+    name: "Consumed",     
+		dataPoints: [
+			{x:"", y: 450 },
+			{ y: 414},
+			{ y: 520, indexLabel: "highest",markerColor: "red", markerType: "triangle" },
+			{ y: 460 },
+			{ y: 450 },
+			{ y: 500 },
+			{ y: 480 },
+			{ y: 480 },
+			{ y: 410 , indexLabel: "lowest",markerColor: "DarkSlateGrey", markerType: "cross" },
+			{ y: 500 },
+			{ y: 480 },
+			{ y: 510 }
+		]
+	}]
+});
+var chartvolt2 = new CanvasJS.Chart("chartContainervolt2", {
+	animationEnabled: true,
+  zoomEnabled: true,
+  theme: "light2", 
+	title:{
+		text: "Daily Voltage Logs " 
+	},
+	axisY :{
+
+	},
+  data: [{        
+    type: "line",  
+    name: "Consumed",     
+		dataPoints: [
+			{ y: 450 },
+			{ y: 414},
+			{ y: 520, indexLabel: "highest",markerColor: "red", markerType: "triangle" },
+			{ y: 460 },
+
+		]
+	}]
+});
+var chartcur = new CanvasJS.Chart("chartContainercur", {
+	animationEnabled: true,
+  zoomEnabled: true,
+  theme: "light2", 
+ 
+	title:{
+		text: "Daily Current Logs " 
+	},
+	axisX :{
+    interval: 1,
+    labelMaxWidth: 70,
+		labelWrap: true, 
+		
+  },
+
+  toolTip:{
+   content:" {l}   - TEMP:   {y}  C       " ,
+ },
+  data: [{        
+    type: "line",  
+    name: "Consumed",  
+       
+		dataPoints: [
+			{y: 37 , label: " 10:13 Apr-01 " , l:"10:13"},
+			{y: 35 , label: "11:13 ", l:"10:13"},
+			{ y: 40 , label: "12:13  ", l:"11:13"},
+      { y: 0 , label: "  1:13", l:"12:13"},
+      { y: 35 , label: " 2:13", l:"1:13"},
+			{ y: 40 , label: " 3:13 ", l:"2:13"},
+      { y: 41 , label: "4:13  ", l:"3:13"},
+      { y: 39 , label: " 5:13", l:"4:13"},
+			{ y: 42 , label: "6:13  ", l:"5:13"},
+      { y: 46 , label: " 7:13 ", l:"6:13"},
+      { y: 37 , label: "8:13 ", l:"7:13"},
+			{ y: 30 , label: "9:13  ", l:"8:13"},
+      { y: 37 , label: " 10:13 ", l:"9:13"},
+      {y: 35 , label: "11:13 ", l:"10:13"},
+			{ y: 40 , label: " 12:13 ", l:"11:13"},
+      { y: 54 , label: "1:13  ", l:"12:13"},
+      { y: 35 , label: "12:13 ", l:"1:13"},
+			{ y: 40 , label: "  ", l:"2:13"},
+      { y: 41 , label: "  ", l:"3:13"},
+      { y: 39 , label: " ", l:"4:13"},
+			{ y: 42 , label: "  ", l:"5:13"},
+      { y: 46 , label: "  ", l:"6:13"},
+      { y: 37 , label: " ", l:"7:13"},
+			{ y: 30 , label: "  ", l:"8:13"},
+      { y: 37 , label: "  ", l:"9:13"},
+      {y: 35 , label: " ", l:"10:13"},
+			{ y: 40 , label: "  ", l:"11:13"},
+      { y: 23 , label: "  ", l:"12:13"},
+      { y: 35 , label: " ", l:"1:13"},
+			{ y: 40 , label: "  ", l:"2:13"},
+      { y: 41 , label: "  ", l:"3:13"},
+      { y: 39 , label: " ", l:"4:13"},
+			{ y: 42 , label: "  ", l:"5:13"},
+      { y: 46 , label: "  ", l:"6:13"},
+      { y: 37 , label: " ", l:"7:13"},
+			{ y: 30 , label: "  ", l:"8:13"},
+      { y: 37 , label: "  ", l:"9:13"},
+      {y: 35 , label: " ", l:"10:13"},
+			{ y: 40 , label: "  ", l:"11:13"},
+      { y: 11 , label: "  ", l:"12:13"},
+      { y: 35 , label: " ", l:"1:13"},
+			{ y: 40 , label: "  ", l:"2:13"},
+      { y: 41 , label: "  ", l:"3:13"},
+      { y: 39 , label: " ", l:"4:13"},
+			{ y: 42 , label: "  ", l:"5:13"},
+      { y: 46 , label: "  ", l:"6:13"},
+      { y: 37 , label: " ", l:"7:13"},
+			{ y: 30 , label: "  ", l:"8:13"},
+      { y: 37 , label: "  ", l:"9:13"},
+      {y: 37 , label: "  Apr-02" , l:"10:13"},
+			{y: 35 , label: " ", l:"10:13"},
+			{ y: 40 , label: "  ", l:"11:13"},
+      { y: 23 , label: "  ", l:"12:13"},
+      { y: 35 , label: " ", l:"1:13"},
+			{ y: 40 , label: "  ", l:"2:13"},
+      { y: 41 , label: "  ", l:"3:13"},
+      { y: 39 , label: " ", l:"4:13"},
+			{ y: 42 , label: "  ", l:"5:13"},
+      { y: 46 , label: "  ", l:"6:13"},
+      { y: 37 , label: " ", l:"7:13"},
+			{ y: 30 , label: "  ", l:"8:13"},
+      { y: 37 , label: "  ", l:"9:13"},
+		]
+	}]
+});
+
+
+
+
+    
+    $('#viewelecmetermodal').on('shown.bs.modal', function () {
+          chart.render();
+    });
+
+
+    $('#viewmpptmodal').on('shown.bs.modal', function () {
+      charttemp.render();
+      chartvolt.render();
+      chartcur.render();
+      
+    });
+  
+ 
+    function chartvoltrender(){
+      chartvolt.render();
+
+    }
+    function chartcurrender(){
+      chartcur.render();
+      
+    }
+    function charttemprender(){
+      charttemp.render();
+   
+    }
+    function chartvoltrender2(){
+      chartvolt2.render();
+
+    }
+    function chartcurrender2(){
+      chartcur2.render();
+      
+    }
+    function charttemprender2(){
+      charttemp2.render();
+   
+    }
+    </script>
+
+
+
+<script>
+  //UTILITY FUNCTIONS
+
+function clearlightadddevice(){
+    document.getElementById("adddeviceform").reset();
+    $('#addlightdevice').modal('hide');
+}
+function clearoutletadddevice(){
+    document.getElementById("oadddeviceform").reset();
+    $('#addoutletdevice').modal('hide');
+}
+
+
+function onalllights(){
+ 
+  var nolights = document.getElementsByClassName('lightdevice').length;
+  
+  for (i=0; i < nolights;i++){
+      var topic = document.getElementsByClassName('lightdevice')[i].id;
+       publishmsg(topic,"LOFF");
+  }
+}
+
+function offalllights(){
+ 
+ var nolights = document.getElementsByClassName('lightdevice').length;
+ 
+ for (i=0; i < nolights;i++){
+     var topic = document.getElementsByClassName('lightdevice')[i].id;
+      publishmsg(topic,"LON");
+ }
+}
+
+function onalloutlet(){
+ var nolights = document.getElementsByClassName('outletdevice').length;
+ for (i=0; i < nolights;i++){
+     var topic = document.getElementsByClassName('outletdevice')[i].id;
+      publishmsg(topic,"SOFF");
+}
+}
+
+function offalloutlet(){
+var nolights = document.getElementsByClassName('outletdevice').length;
+for (i=0; i < nolights;i++){
+    var topic = document.getElementsByClassName('outletdevice')[i].id;
+     publishmsg(topic,"SON");
+}
+}
+/*function controlalllights(){
+  var imgsrc =  document.getElementById('modalmainbuttons').style.backgroundImage;
+  var nolights = document.getElementsByClassName('lightdevice').length;
+  
+  for (i=0; i < nolights;i++){
+    if (imgsrc == 'url("icons/alllighton.png")'){
+      var topic = document.getElementsByClassName('lightdevice')[i].id;
+    
+       publishmsg(topic,"LOFF");
+    }
+    if (imgsrc == 'url("icons/alllightoff.png")'){
+      var topic = document.getElementsByClassName('lightdevice')[i].id;
+      publishmsg(topic,"LON");
+    }
+  }
+  if (imgsrc == 'url("icons/alllighton.png")'){
+    document.getElementById('modalmainbuttons').style.backgroundImage = 'url("icons/alllightoff.png")';
+  }
+  else if (imgsrc == 'url("icons/alllightoff.png")'){
+    document.getElementById('modalmainbuttons').style.backgroundImage = 'url("icons/alllighton.png")';
+  }
+}
+
+function controlalloutlet(){
+  var imgsrc =  document.getElementById('omodalmainbuttons').style.backgroundImage;
+  var nolights = document.getElementsByClassName('outletdevice').length;
+  for (i=0; i < nolights;i++){
+    if (imgsrc == 'url("icons/allsocketon.png")'){
+      var topic = document.getElementsByClassName('outletdevice')[i].id;
+       publishmsg(topic,"SOFF");
+    }
+    if (imgsrc == 'url("icons/allsocketoff.png")'){
+      var topic = document.getElementsByClassName('outletdevice')[i].id;
+      publishmsg(topic,"SON");
+    }
+  }
+  if (imgsrc == 'url("icons/allsocketon.png")'){
+    document.getElementById('omodalmainbuttons').style.backgroundImage = 'url("icons/allsocketoff.png")';
+  }
+  else if (imgsrc == 'url("icons/allsocketoff.png")'){
+    document.getElementById('omodalmainbuttons').style.backgroundImage = 'url("icons/allsocketon.png")';
+  }
+}
+*/
+function addlightvalidate(iname,istopic,iptopic){
+  name = iname;
+  stopic = istopic;
+  ptopic= iptopic;
+  if (name == "" ) {
+    var x = document.getElementById("ldevnamevalid");
+    x.style.display = "block";
+  }
+  else{
+    addlightdevice(name,stopic,ptopic);
+  }
+
+}
+
+function addoutletvalidate(iname,istopic,iptopic){
+  name = iname;
+  stopic = istopic;
+  ptopic= iptopic;
+  if (name == "" ) {
+    var x = document.getElementById("odevnamevalid");
+    x.style.display = "block";
+  }
+  else{
+    addoutletdevice(name,stopic,ptopic);
+  }
+
+}
+function clicked(field){
+
+  var x = document.getElementById(field);
+    if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+ 
+  }
+
+}
+function addlightdevice(name,stopic,ptopic){
+  var r = Math.random().toString(36).substring(7);
+  var column = document.createElement("div");
+    column.className = " col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 padding " + r;
+    (document.getElementById("lightbox")).appendChild(column);
+
+    var input = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.value = "LON"
+    input.setAttribute("name",  "mqtt" + stopic);
+    input.className = "lightdevice"
+    input.id = ptopic;
+    input.hidden = true;
+    column.appendChild(input); 
+
+    var button = document.createElement("button");
+    button.className = "addedbuttons"
+    button.name = stopic;
+    button.id = r;
+    button.style = "background-image:URL('icons/lightswitchoff.png')";
+    button.innerText = name;
+   // button.onclick =  function (){
+    //  var msg = document.getElementById(ptopic).value;
+     // alert("clicked");
+    //  publishmsg(ptopic,msg);
+    // }
+    column.appendChild(button); 
+    publishmsg(ptopic,"CON");
+    alert("con");
+    clearlightadddevice()
+
+
+}
+function addoutletdevice(name,stopic,ptopic){
+  var r = Math.random().toString(36).substring(7);
+  var column = document.createElement("div");
+    column.className = " col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 padding " + r;
+    (document.getElementById("outletbox")).appendChild(column);
+
+    var input = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.value = "SON"
+    input.setAttribute("name",  "mqtt" + stopic);
+    input.className = "outletdevice"
+    input.id = ptopic;
+    input.hidden = true;
+    column.appendChild(input); 
+
+    var button = document.createElement("button");
+    button.className = "oaddedbuttons"
+    button.name = stopic;
+    button.id = r;
+    button.style = "background-image:URL('icons/socketoff.png')";
+    button.innerText = name;
+    
+    column.appendChild(button); 
+    publishmsg(ptopic,"CON");
+    alert("con");
+    clearoutletadddevice()
+
+
+}
+function editlightdevice(iname,istopic,iptopic){
+  var devname = document.getElementById('hdevname1').innerHTML;
+var stopic =document.getElementById('hdevstopic').innerHTML;
+var ptopic =document.getElementById('hdevptopic').innerHTML;
+var devname = document.getElementById('hdevice').innerHTML;
+}
+
+
+</script>
+
+
+  <script type="text/javascript">
+    $(function() {
+    
+        var start = moment();
+        var end = moment();
+    
+        function cb(start, end) {
+            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            publishmsg("TOPIC/UTIL/ELECT/ALLMSG", (start.format('YYYY-MM-DD')) + "-" +  end.format('YYYY/MM/DD') + "/"+ document.getElementById('userlog').textContent );
+        }
+    
+        $('#reportrange').daterangepicker({
+            startDate: start,
+            endDate: end,
+            ranges: {
+               'Today': [moment(), moment()],
+               'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+               'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+               'This Month': [moment().startOf('month'), moment().endOf('month')],
+               'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, cb);
+        cb(start, end);
+
+        });
+    </script>
+
+<script type="text/javascript">
+  $(function() {
+  
+      var startt = moment();
+      var endt = moment();
+      var todayt = moment();
+
+
+  
+      function cbt(startt, endt) {
+          $('#reportranget span').html(startt.format('MMMM D, YYYY') + ' - ' + endt.format('MMMM D, YYYY'));
+          charttemp.set("datapoints", true, false);
+          document.getElementById('tempchosendate').innerHTML = startt.format('YYYY-MM-DD') + "-" +  endt.format('YYYY/MM/DD');
+         // var x = document.getElementById('tempchosendate').innerHTML;
+      /*    if (endt.format('MMMM D, YYYY') == todayt.format('MMMM D, YYYY')) {
+            $('#chartContainertemp').show();
+            $('#chartContainertemp2').hide();
+          
+            charttemprender();
+          } 
+          else  {
+            $('#chartContainertemp2').show();
+            $('#chartContainertemp').hide();
+            
+            charttemprender2();
+          }*/
+          
+          publishmsg("TOPIC/UTIL/TEMP/ALLMSG", (startt.format('YYYY-MM-DD')) + "-" +  endt.format('YYYY/MM/DD') + "/" + document.getElementById('userlog').textContent);
+      }
+  
+      $('#reportranget').daterangepicker({
+          startDate: startt,
+          endDate: endt,
+          ranges: {
+             'Today': [moment(), moment()],
+             'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+             'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+             'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+             'This Month': [moment().startOf('month'), moment().endOf('month')],
+             'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          }
+      }, cbt);
+      cbt(startt, endt);
+
+      });
+  </script>
+
+<script type="text/javascript">
+  $(function() {
+  
+      var startv = moment();
+      var endv = moment();
+      var todayv = moment();
+  
+      function cbv(startv, endv) {
+          $('#reportrangev span').html(startv.format('MMMM D, YYYY') + ' - ' + endv.format('MMMM D, YYYY'));
+          chartvolt.set("datapoints", true, false);
+          if (endv.format('MMMM D, YYYY') == todayv.format('MMMM D, YYYY')) {
+            $('#chartContainervolt').show();
+           $('#chartContainervolt2').hide();
+        
+          chartvoltrender();
+          } 
+          else  {
+            $('#chartContainervolt2').show();
+          $('#chartContainervolt').hide();
+          
+           chartvoltrender2();
+          }
+            publishmsg("TOPIC/UTIL/ELECTT/ALLMSG", (startv.format('MMMM-D-YYYY')) + "stop" +  endv.format('MMMM-D-YYYY')+ "/" + document.getElementById('userlog').textContent);
+      }
+  
+      $('#reportrangev').daterangepicker({
+          startDate: startv,
+          endDate: endv,
+          ranges: {
+             'Today': [moment(), moment()],
+             'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+             'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+             'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+             'This Month': [moment().startOf('month'), moment().endOf('month')],
+             'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          }
+      }, cbv);
+      cbv(startv, endv);
+
+      });
+  </script>
+
+
+<script type="text/javascript">
+  $(function() {
+  
+      var startc = moment();
+      var endc = moment();
+      var todayc = moment();
+  
+      function cbc(startc, endc) {
+          $('#reportrangec span').html(startc.format('MMMM D, YYYY') + ' - ' + endc.format('MMMM D, YYYY'));
+          chartcur.set("datapoints", true, false);
+          if (endc.format('MMMM D, YYYY') == todayc.format('MMMM D, YYYY')) {
+            $('#chartContainercur').show();
+           $('#chartContainercur2').hide();
+          chartcurrender();
+          } 
+          else  {
+            $('#chartContainercur2').show();
+            $('#chartContainercur').hide();
+          
+           chartcurrender2();
+          }
+           publishmsg("TOPIC/UTIL/ELECTT/ALLMSG", (startc.format('MMMM-D-YYYY')) + "stop" +  endc.format('MMMM-D-YYYY') + "/"+ document.getElementById('userlog').textContent);
+      }
+  
+      $('#reportrangec').daterangepicker({
+          startDate: startc,
+          endDate: endc,
+          ranges: {
+             'Today': [moment(), moment()],
+             'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+             'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+             'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+             'This Month': [moment().startOf('month'), moment().endOf('month')],
+             'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          }
+      }, cbc);
+      cbc(startc,endc);
+
+      });
+  </script>
+
+
+
+</html> 

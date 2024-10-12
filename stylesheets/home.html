@@ -1,0 +1,158 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+</script>
+
+<div hidden id="fname"></div>
+<div hidden id="htmls"></div>
+<div hidden id="lname"></div>
+<div hidden id="uname"></div>
+<div hidden id="nname"></div>
+<div hidden id="pword"></div>
+<!-- DASHBOARD -->
+<section>
+    <a hidden id="getdata" href="/home">LOAD DATA</a>
+    <script>
+        var decodedJson = decodeURIComponent("{{{encodedJson}}}");
+        var jsonObj = JSON.parse(decodedJson);
+        $(document).ready(function() {
+            $("#login").hide();
+            $("#signup").hide();
+            $("#btn").show();
+            $('#htmls').append(jsonObj.htmls)
+            $('#lname').append(jsonObj.LastName)
+            $('#nname').append(jsonObj.Nickname)
+            $('#uname').append(jsonObj.Username)
+            $('#pword').append(jsonObj.password)
+            $('#fname').append(jsonObj.FirstName)
+            $("#nname").show();
+            $("#htmls").show();
+            $("#logout").show();
+        });
+    </script>
+</section>
+
+<!-- ADD BUTTON -->
+<div id="html1">
+
+    <div id="test3">
+
+
+        <p id="variable"></p>
+    </div>
+    <div hidden id="btn">
+        <iframe name="votar" style="display:none;"></iframe>
+        <form action="/submit-data" method="POST" target="votar">
+            <div hidden class="input"><label for="html3">HTML</label><input type="text" id="html3" name="html3"></div>
+            <div class="input"><label for="var">HTML</label><input type="text" id="var" name="var"></div>
+            <button type="submit" id="submitbutton" data-target="myButton" onclick="myFunction();">Try it</button>
+            <section>
+                <div class="divclass" id="trial">
+                </div>
+                <script>
+                    function vari() {
+                        var x = document.getElementById('var').value
+                        document.getElementById('variable').value = x;
+                    }
+
+                    function myFunction() {
+                        var btn = document.createElement("BUTTON");
+                        var t = document.createTextNode("CLICK ME");
+                        btn.appendChild(t);
+                        document.getElementById("test3").append(btn);
+                        var x = document.getElementById('var').value
+                        document.getElementById('variable').innerHTML = "";
+                        document.getElementById('variable').append(x);
+                        var html = document.getElementById("test3").outerHTML;
+                        document.getElementById("html3").value = html;
+                    }
+                </script>
+            </section>
+        </form>
+    </div>
+</div>
+
+<a hidden href="/logout" id="logout">Logout</a>
+
+<!--UPDATE -->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+
+<body>
+    <div class="container">
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="setValue();">Update Information</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form action="/update-form" method="POST">
+                            <script>
+                                function setValue() {
+                                    var fname = document.getElementById("fname").innerHTML;
+                                    document.getElementById("FnameUpdate").value = fname;
+                                    var lname = document.getElementById("lname").innerHTML;
+                                    document.getElementById("LnameUpdate").value = lname;
+                                    var uname = document.getElementById("uname").innerHTML;
+                                    document.getElementById("UnameUpdate").value = uname;
+                                    var pword = document.getElementById("pword").innerHTML;
+                                    document.getElementById("pwordUpdate").value = pword;
+                                    var pword = document.getElementById("pword").innerHTML;
+                                    document.getElementById("cpasswordUpdate").value = pword;
+                                    var nname = document.getElementById("nname").innerHTML;
+                                    document.getElementById("NnameUpdate").value = nname;
+                                }
+                            </script>
+                            <div class="input">
+                                <label for="FnameUpdate">First Name</label>
+                                <input type="text" id="FnameUpdate" name="FnameUpdates" required>
+                                <div class="input">
+                                    <label for="LnameUpdate">Last Name</label>
+                                    <input type="text" id="LnameUpdate" name="LnameUpdates" required>
+                                </div>
+                                <div class="input">
+                                    <label for="NnameUpdate">Nickname</label>
+                                    <input type="text" id="NnameUpdate" name="NnameUpdates" pattern="^[A-Za-z]+" title="Please enter alphabets only" required>
+                                </div>
+                                <div class="input">
+                                    <label for="UnameUpdate">Username</label>
+                                    <input type="text" id="UnameUpdate" name="UnameUpdates" required>
+                                </div>
+                                <div class="input">
+                                    <label for="pwordUpdate">Password</label>
+                                    <input type="password" id="pwordUpdate" name="pwordUpdates" required>
+
+                                </div>
+                                <div class="input">
+                                    <label id="cpass_label" for="cpasswordUpdate">Confirm New Password</label>
+                                    <input type="password" id="cpasswordUpdate" name="cpasswordUpdates">
+                                </div>
+                                <button type="submit" id="saveUpdate">Save</button>
+                            </div>
+                        </form>
+
+                        <div class="modal-footer">
+                            <button type="button" id="close" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>

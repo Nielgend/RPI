@@ -1,0 +1,511 @@
+body {
+    background-color: #1d304f;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #4b4b4b;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: #4b4b4b;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px #1d304f;
+    background-color: #555;
+}
+
+@media screen and (min-width: 995px) {
+    .container {
+        min-width: 99%;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+    .float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        top: 5em;
+        right: 40px;
+        background-color: #0C9;
+        color: #FFF;
+        border-radius: 50px;
+        text-align: center;
+        box-shadow: 2px 2px 3px #999;
+    }
+    .my-float {
+        margin-top: 2px;
+    }
+    .float2 {
+        position: fixed;
+        z-index: 1;
+        width: 20em;
+        height: 30em;
+        bottom: 2.4em;
+        right: 5px;
+        background-color: rgb(37, 37, 37);
+        color: rgb(0, 0, 0);
+        text-align: center;
+        border: rgba(68, 66, 66, 0.651) solid 2px;
+    }
+    .float3 {
+        position: fixed;
+        z-index: 1;
+        width: 13.35em;
+        height: 1.5em;
+        bottom: 1px;
+        right: 5px;
+        background-color: rgb(37, 37, 37);
+        color: rgb(255, 255, 255);
+        text-align: center;
+        font-size: 1.5em;
+        text-align: center;
+    }
+    .messageinput {
+        padding-left: 5px;
+        background-color: rgb(37, 37, 37);
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+        border-bottom: white solid 1px;
+        color: white;
+    }
+    .messageinput:focus {
+        outline: none;
+    }
+    .messagebox {
+        width: auto;
+        height: 27em;
+        border-bottom: 2px solid rgb(37, 37, 37);
+        overflow-y: auto;
+        overflow-x: hidden;
+        overflow-wrap: break-word;
+        padding: 10px 0.5em;
+    }
+    .text-bar {
+        width: auto;
+        height: 3em;
+        text-align: left;
+        bottom: 5px;
+    }
+    .messagetext {
+        padding: 0px 5px;
+        text-align: left;
+        width: 10em;
+    }
+    .cons1 {
+        margin: 2px auto;
+        border: white solid 3px;
+        width: 49vw;
+        padding-bottom: 0px;
+    }
+    .paddingtitle {
+        margin: 0px;
+        padding: 0px 0px;
+        width: auto;
+        height: 9.8vw;
+        text-align: center;
+    }
+    .leftpaddingtitle {
+        margin: 0px;
+        padding: 0px 1.2px;
+        width: auto;
+        height: 9.8vw;
+        text-align: right;
+    }
+    .rightpaddingtitle {
+        margin: 0px;
+        padding: 0px 1.5px;
+        width: auto;
+        height: 9.8vw;
+        text-align: left;
+    }
+    .presetbuttons {
+        height: 9.6vw;
+        width: 24vw;
+        background-size: 100%;
+        text-align: center;
+        overflow-wrap: break-word;
+        border: 0px;
+        cursor: pointer;
+        color: white;
+        padding: 0px 0px;
+    }
+    .smallpresetbuttons {
+        height: 9.6vw;
+        width: 12vw;
+        background-size: 100%;
+        text-align: center;
+        overflow-wrap: break-word;
+        border: 0px;
+        cursor: pointer;
+        color: white;
+        padding: 0px 0px;
+    }
+    .addedbuttons {
+        height: 100% !important;
+        width: 99%;
+        background-size: 100%;
+        text-align: center;
+        overflow-wrap: break-word;
+        padding-left: 35%;
+        padding-top: 15%;
+        border: 0px;
+        cursor: pointer;
+        font-size: 1em;
+        color: white;
+        text-transform: uppercase;
+    }
+    .oaddedbuttons {
+        height: 100% !important;
+        width: 99%;
+        background-size: 100%;
+        text-align: center;
+        overflow-wrap: break-word;
+        padding-left: 35%;
+        padding-top: 15%;
+        border: 0px;
+        cursor: pointer;
+        font-size: 1em;
+        color: white;
+        text-transform: uppercase;
+    }
+    .padding {
+        padding: 1.8px;
+        height: 10em;
+    }
+    .paddingcam {
+        padding-top: 1px;
+        padding-left: 1px;
+        padding-right: 1px;
+        padding-bottom: 0px;
+        height: 8em;
+    }
+    .paddingpower {
+        padding: 1.8px;
+        height: 1.5em;
+    }
+    .paddingpower1 {
+        padding: 1.8px;
+        height: 5em;
+    }
+    .paddingpower2 {
+        padding: 1.8px;
+        height: 2.5em;
+    }
+    .paddingpowerchart {
+        padding: 1.8px;
+        height: 35em;
+    }
+    .modalmainbuttons {
+        height: 8em;
+        width: 20em;
+        background-size: 100%;
+        text-align: center;
+        overflow-wrap: break-word;
+        border: 0px;
+        cursor: pointer;
+        color: white;
+        padding: 0px 0px;
+    }
+    .camerastyle {
+        overflow-x: hidden;
+        overflow-y: hidden
+    }
+    .camerabuttons {
+        height: 100% !important;
+        width: 80%;
+        background-size: 100%;
+        text-align: center;
+        overflow-wrap: break-word;
+        padding-left: 35%;
+        padding-top: 15%;
+        border: 0px;
+        cursor: pointer;
+        font-size: 1em;
+        color: white;
+        text-transform: uppercase;
+    }
+    .camerabuttonss {
+        height: 100% !important;
+        width: 50%;
+        background-size: 100%;
+        text-align: center;
+        overflow-wrap: break-word;
+        padding-left: 35%;
+        padding-top: 15%;
+        border: 0px;
+        cursor: pointer;
+        font-size: 1em;
+        color: white;
+        text-transform: uppercase;
+    }
+    .lightsmodals {
+        max-width: 40vw !important;
+        min-width: 10vw !important;
+        margin: 2em auto;
+    }
+    div.ochatname {
+        color: white;
+        font-size: 1em;
+        padding-left: 0.8em;
+        font-weight: bold;
+    }
+    div.ochatmsg {
+        width: 100%;
+        font-size: 1em;
+        max-width: 15em;
+        min-width: 1em;
+        word-wrap: break-word;
+        background-color: #d4d4d4;
+        color: black;
+        padding: .5em;
+        border-radius: 1em;
+        text-align: left;
+        text-justify: inter-word;
+        line-height: 1.1;
+        word-spacing: 0.04em;
+    }
+    div.ochattime {
+        font-size: 0.6em;
+        font-style: italic;
+        color: #fefffe;
+        padding-left: 1em;
+        margin-bottom: 0.8em;
+    }
+    div.schatmsg {
+        width: 100%;
+        font-size: 1em;
+        max-width: 15em;
+        min-width: 1em;
+        word-wrap: break-word;
+        background-color: #1068b1;
+        padding: .5em;
+        padding-right: 10px;
+        border-radius: 1em;
+        text-align: left;
+        text-justify: inter-word;
+    }
+    div.schattime {
+        font-size: 0.6em;
+        font-style: italic;
+        color: #dcdddc;
+        padding-right: 1em;
+        text-align: right;
+        margin-bottom: 0.8em;
+    }
+    div.flexleft {
+        display: flex;
+        justify-content: flex-start;
+    }
+    div.flexright {
+        display: flex;
+        justify-content: flex-end;
+    }
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
+}
+
+@media screen and (min-width: 575px) and (max-width:995px) {
+    .container {
+        min-width: 99%;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+    .float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        top: 5em;
+        right: 40px;
+        background-color: #0C9;
+        color: #FFF;
+        border-radius: 50px;
+        text-align: center;
+        box-shadow: 2px 2px 3px #999;
+    }
+    .my-float {
+        margin-top: 2px;
+    }
+    .float2 {
+        position: fixed;
+        z-index: 1;
+        width: 20em;
+        height: 30em;
+        bottom: 2.4em;
+        right: 5px;
+        background-color: rgb(37, 37, 37);
+        color: rgb(0, 0, 0);
+        text-align: center;
+        border: rgba(68, 66, 66, 0.651) solid 2px;
+    }
+    .float3 {
+        position: fixed;
+        z-index: 1;
+        width: 13.35em;
+        height: 1.5em;
+        bottom: 1px;
+        right: 5px;
+        background-color: rgb(37, 37, 37);
+        color: rgb(255, 255, 255);
+        text-align: center;
+        font-size: 1.5em;
+        text-align: center;
+    }
+    .messageinput {
+        padding-left: 5px;
+        background-color: rgb(37, 37, 37);
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+        border-bottom: white solid 1px;
+        color: white;
+    }
+    .messageinput:focus {
+        outline: none;
+    }
+    .messagebox {
+        width: auto;
+        height: 27em;
+        border-bottom: 2px solid rgb(37, 37, 37);
+        overflow-y: auto;
+        overflow-x: hidden;
+        overflow-wrap: break-word;
+        padding: 1px 0.5em;
+    }
+    .text-bar {
+        width: auto;
+        height: 3em;
+        text-align: left;
+        bottom: 5px;
+    }
+    .messagetext {
+        padding: 0px 5px;
+        text-align: left;
+        width: 10em;
+    }
+    .cons1 {
+        margin: 2px auto;
+        border: white solid 3px;
+        width: 49vw;
+        padding-bottom: 0px;
+    }
+    .paddingtitle {
+        margin: 0px;
+        padding: 0px 0px;
+        width: auto;
+        height: 9.8vw;
+        text-align: center;
+    }
+    .presetbuttons {
+        height: 9.6vw;
+        width: 24vw;
+        background-size: 100%;
+        text-align: center;
+        overflow-wrap: break-word;
+        border: 0px;
+        cursor: pointer;
+        color: white;
+        padding: 0px 0px;
+    }
+    .addedbuttons {
+        height: 100% !important;
+        width: 99%;
+        background-size: 100%;
+        text-align: center;
+        overflow-wrap: break-word;
+        padding-left: 35%;
+        padding-top: 15%;
+        border: 0px;
+        cursor: pointer;
+        font-size: 1em;
+        color: white;
+        text-transform: uppercase;
+    }
+    .padding {
+        padding: 1.8px;
+        height: 6em;
+    }
+    .modalmainbuttons {
+        height: 8em;
+        width: 20em;
+        background-size: 100%;
+        text-align: center;
+        overflow-wrap: break-word;
+        border: 0px;
+        cursor: pointer;
+        color: white;
+        padding: 0px 0px;
+    }
+    .lightsmodals {
+        max-width: 40vw !important;
+        min-width: 10vw !important;
+        margin: 2em auto;
+    }
+    div.ochatname {
+        color: white;
+        font-size: 1em;
+        padding-left: 0.8em;
+        font-weight: bold;
+    }
+    div.ochatmsg {
+        width: 100%;
+        font-size: 1em;
+        max-width: 15em;
+        min-width: 1em;
+        word-wrap: break-word;
+        background-color: #d4d4d4;
+        color: black;
+        padding: .5em;
+        border-radius: 1em;
+        text-align: left;
+        text-justify: inter-word;
+        line-height: 1.1;
+        word-spacing: 0.04em;
+    }
+    div.ochattime {
+        font-size: 0.6em;
+        font-style: italic;
+        color: #fefffe;
+        padding-left: 1em;
+        margin-bottom: 0.8em;
+    }
+    div.schatmsg {
+        width: 100%;
+        font-size: 1em;
+        max-width: 15em;
+        min-width: 1em;
+        word-wrap: break-word;
+        background-color: #1068b1;
+        padding: .5em;
+        padding-right: 0px;
+        border-radius: 1em;
+        text-align: left;
+        text-justify: inter-word;
+    }
+    div.schattime {
+        font-size: 0.6em;
+        font-style: italic;
+        color: #dcdddc;
+        padding-right: 1em;
+        text-align: right;
+        margin-bottom: 0.8em;
+    }
+    div.flexleft {
+        display: flex;
+        justify-content: flex-start;
+    }
+    div.flexright {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+@media screen and (max-width: 575px) {}
